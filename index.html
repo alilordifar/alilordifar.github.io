@@ -3,469 +3,1748 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Lordifar — Senior Big Data Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>DataAly — Master Big Data Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Clash+Display:wght@400;500;600;700&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#080c10;--bg2:#0d1117;--bg3:#161b22;--surface:#1c2230;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#10b981;
-  --text:#e6edf3;--muted:#8b949e;
-  --mono:'Space Mono',monospace;--sans:'Sora',sans-serif;
+  --bg:#07090f;
+  --bg2:#0e1118;
+  --bg3:#151923;
+  --bg4:#1c2235;
+  --surface:#222840;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.12);
+  --accent:#f97316;
+  --accent2:#3b82f6;
+  --accent3:#10b981;
+  --accent4:#a855f7;
+  --text:#eef0f7;
+  --muted:#7c8299;
+  --muted2:#4a5068;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Clash Display',sans-serif;
+  --body:'Instrument Sans',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;overflow-x:hidden}
-::-webkit-scrollbar{width:4px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:2px}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+a{text-decoration:none;color:inherit}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3rem;background:rgba(8,12,16,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:var(--mono);font-size:.95rem;color:var(--accent);letter-spacing:.02em}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:60px;
+  background:rgba(7,9,15,0.92);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-size:1.25rem;font-weight:700}
+.nav-brand .dot{color:var(--accent)}
+.nav-links{display:flex;gap:.25rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);padding:.45rem .85rem;border-radius:4px;transition:all .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg3)}
+.nav-cta{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--accent);color:#fff;padding:.45rem 1.1rem;border-radius:4px;
+  transition:all .2s;font-weight:700;
+}
+.nav-cta:hover{background:#ea6a00;transform:translateY(-1px)}
 
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,255,0.07) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,transparent 70%);pointer-events:none}
-.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);pointer-events:none;opacity:.35}
-.hero-tag{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
-.hero-tag::before{content:'';display:inline-block;width:2rem;height:1px;background:var(--accent)}
-.hero h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:.3rem}
-.name-dim{color:var(--muted);font-weight:300}
-.hero-title{font-family:var(--mono);font-size:clamp(.9rem,2vw,1.2rem);color:var(--accent);margin-bottom:2rem;opacity:.9}
-.hero-bio{max-width:580px;color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:2.5rem}
-.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:all .2s;cursor:pointer;border:none}
-.btn-primary{background:var(--accent);color:#000;font-weight:700}
-.btn-primary:hover{background:#33ecff;transform:translateY(-2px)}
-.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text)}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+/* ── PAGES ── */
+.page{display:none;min-height:100vh;padding-top:60px}
+.page.active{display:block}
+
+/* ── HOME PAGE ── */
+.home-hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 4rem;position:relative;overflow:hidden;
+}
+.home-hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(249,115,22,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(59,130,246,0.06) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;
+}
+.hero-eyebrow::before{content:'';width:2.5rem;height:1px;background:var(--accent)}
+.home-hero h1{
+  font-family:var(--display);font-size:clamp(3rem,8vw,7rem);
+  font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:1.5rem;
+}
+.home-hero h1 .line2{
+  background:linear-gradient(135deg,var(--accent),#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.home-hero h1 .line3{color:var(--muted);font-weight:400}
+.hero-sub{
+  max-width:520px;color:var(--muted);font-size:1.05rem;line-height:1.85;margin-bottom:3rem;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.75rem;border-radius:6px;font-family:var(--mono);
+  font-size:.75rem;letter-spacing:.07em;text-transform:uppercase;
+  font-weight:700;transition:all .25s;cursor:pointer;border:none;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#ea6a00;transform:translateY(-2px);box-shadow:0 8px 24px rgba(249,115,22,0.3)}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:.25rem}
+.stat-n{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--text)}
+.stat-n span{color:var(--accent)}
+.stat-l{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+/* feature cards */
+.home-features{padding:6rem 4rem;max-width:1200px;margin:0 auto}
+.section-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.section-heading{font-family:var(--display);font-size:2.2rem;font-weight:600;letter-spacing:-.02em;margin-bottom:3rem}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.feature-card{
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:2rem;transition:all .3s;cursor:pointer;
+}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-4px);background:var(--bg4)}
+.feature-icon{font-size:2rem;margin-bottom:1.25rem;display:block}
+.feature-title{font-family:var(--display);font-size:1.1rem;font-weight:600;margin-bottom:.6rem}
+.feature-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+/* ── ABOUT PAGE ── */
+.about-wrap{max-width:1000px;margin:0 auto;padding:5rem 4rem}
+.about-hero{display:grid;grid-template-columns:1fr 280px;gap:4rem;align-items:start;margin-bottom:5rem}
+.about-tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.about-name{font-family:var(--display);font-size:3rem;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem}
+.about-role{font-family:var(--mono);font-size:.9rem;color:var(--accent);margin-bottom:2rem}
+.about-bio p{color:var(--muted);margin-bottom:1rem;font-size:.98rem;line-height:1.85}
+.about-photo{width:100%;aspect-ratio:1;border-radius:12px;object-fit:cover;object-position:center top;border:1px solid var(--border2);box-shadow:0 0 40px rgba(249,115,22,0.1)}
+.about-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:4rem}
+.astat{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center}
+.astat-n{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--accent)}
+.astat-l{font-size:.78rem;color:var(--muted);margin-top:.25rem}
+.skills-section{margin-bottom:4rem}
+.skills-section h3{font-family:var(--display);font-size:1.3rem;font-weight:600;margin-bottom:1.5rem}
+.skill-group{margin-bottom:2rem}
+.skill-group-name{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.5rem}
+.spill{padding:.35rem .9rem;background:var(--bg4);border:1px solid var(--border2);border-radius:4px;font-family:var(--mono);font-size:.72rem;color:var(--text);transition:all .2s}
+.spill:hover{border-color:var(--accent);color:var(--accent)}
+.spill.o{border-color:rgba(249,115,22,0.35);color:var(--accent)}
+.spill.b{border-color:rgba(59,130,246,0.35);color:#60a5fa}
+.spill.g{border-color:rgba(16,185,129,0.35);color:#34d399}
+.spill.p{border-color:rgba(168,85,247,0.35);color:#c084fc}
+.exp-timeline{margin-bottom:4rem}
+.exp-timeline h3{font-family:var(--display);font-size:1.3rem;font-weight:600;margin-bottom:2rem}
+.exp-item2{padding-left:1.5rem;border-left:1px solid var(--border2);margin-bottom:2rem;padding-bottom:2rem;position:relative}
+.exp-item2::before{content:'';position:absolute;left:-4px;top:6px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.exp-role2{font-size:1rem;font-weight:600;color:var(--text)}
+.exp-co{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin:.2rem 0 .75rem}
+.exp-date2{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-bottom:.6rem}
+.exp-pts{list-style:none}
+.exp-pts li{font-size:.88rem;color:var(--muted);padding-left:1rem;position:relative;margin-bottom:.3rem}
+.exp-pts li::before{content:'›';position:absolute;left:0;color:var(--accent)}
+.contact-row{display:flex;gap:1rem;flex-wrap:wrap}
+.contact-chip{
+  display:flex;align-items:center;gap:.6rem;padding:.6rem 1.2rem;
+  background:var(--bg3);border:1px solid var(--border);border-radius:6px;
+  font-size:.85rem;transition:all .2s;
+}
+.contact-chip:hover{border-color:var(--accent);color:var(--accent)}
+.contact-chip span{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+
+/* ── TUTORIALS PAGE ── */
+.tutorials-layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 60px)}
+.tut-sidebar{
+  background:var(--bg2);border-right:1px solid var(--border);
+  padding:2rem 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;
+}
+.tut-sidebar::-webkit-scrollbar{width:2px}
+.sidebar-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);padding:.5rem 1.5rem;margin-bottom:.25rem}
+.topic-group{margin-bottom:.5rem}
+.topic-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.6rem 1.5rem;cursor:pointer;transition:all .2s;
+  font-size:.85rem;font-weight:500;color:var(--muted);
+}
+.topic-header:hover{background:var(--bg3);color:var(--text)}
+.topic-header.open{color:var(--accent)}
+.topic-arrow{font-size:.6rem;transition:transform .2s}
+.topic-header.open .topic-arrow{transform:rotate(90deg)}
+.topic-icon{margin-right:.5rem}
+.topic-children{display:none;padding-left:.5rem}
+.topic-children.open{display:block}
+.subtopic{
+  display:block;padding:.45rem 1.5rem .45rem 2rem;
+  font-size:.82rem;color:var(--muted);cursor:pointer;transition:all .15s;
+  border-left:2px solid transparent;
+}
+.subtopic:hover{color:var(--text);border-left-color:var(--border2)}
+.subtopic.active{color:var(--accent);border-left-color:var(--accent);background:rgba(249,115,22,0.05)}
+.tut-content{padding:3rem 4rem;max-width:900px}
+.lesson-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.lesson-breadcrumb{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-bottom:.75rem;letter-spacing:.04em}
+.lesson-breadcrumb span{color:var(--accent)}
+.lesson-title{font-family:var(--display);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}
+.lesson-desc{color:var(--muted);font-size:.98rem;line-height:1.8;max-width:640px}
+.lesson-section{margin-bottom:3rem}
+.lesson-section h3{font-family:var(--display);font-size:1.2rem;font-weight:600;margin-bottom:1rem;color:var(--text)}
+.lesson-section p{color:var(--muted);font-size:.95rem;line-height:1.85;margin-bottom:1rem}
+.lesson-section ul{list-style:none;margin-bottom:1rem}
+.lesson-section ul li{color:var(--muted);font-size:.93rem;padding-left:1.25rem;position:relative;margin-bottom:.4rem;line-height:1.75}
+.lesson-section ul li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.7rem;top:.25rem}
+.callout{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.callout.blue{background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.2)}
+.callout.green{background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.2)}
+.callout-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.callout.blue .callout-label{color:#60a5fa}
+.callout.green .callout-label{color:#34d399}
+.callout p{color:var(--text);font-size:.9rem;line-height:1.7;margin:0}
+
+/* code block */
+.code-block{margin:1.5rem 0;border-radius:8px;overflow:hidden;border:1px solid var(--border2)}
+.code-header{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg4);padding:.65rem 1rem;border-bottom:1px solid var(--border);
+}
+.code-lang{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.code-copy{font-family:var(--mono);font-size:.65rem;color:var(--muted);cursor:pointer;transition:color .2s;background:none;border:none;letter-spacing:.06em}
+.code-copy:hover{color:var(--text)}
+.code-block pre{margin:0 !important;border-radius:0 !important;background:var(--bg3) !important;font-size:.83rem !important;line-height:1.65 !important;padding:1.25rem !important}
+
+/* interactive playground */
+.playground{margin:2rem 0;border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.playground-header{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg4);padding:.75rem 1.25rem;border-bottom:1px solid var(--border);
+}
+.playground-title{font-family:var(--mono);font-size:.75rem;color:var(--text);font-weight:700;display:flex;align-items:center;gap:.5rem}
+.playground-title::before{content:'▶';color:var(--accent3);font-size:.6rem}
+.playground-tabs{display:flex;gap:.25rem}
+.ptab{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.35rem .8rem;border-radius:4px;cursor:pointer;border:1px solid transparent;
+  color:var(--muted);transition:all .2s;background:none;
+}
+.ptab.active{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+.playground-editor{position:relative}
+.playground-textarea{
+  width:100%;min-height:160px;background:var(--bg3);
+  border:none;outline:none;padding:1.25rem;resize:vertical;
+  font-family:var(--mono);font-size:.82rem;color:var(--text);line-height:1.65;
+  tab-size:4;
+}
+.playground-actions{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg4);padding:.6rem 1.25rem;border-top:1px solid var(--border);
+}
+.run-btn{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--accent3);color:#fff;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.45rem 1.1rem;border-radius:4px;font-weight:700;transition:all .2s;
+}
+.run-btn:hover{background:#059669;transform:translateY(-1px)}
+.reset-btn{font-family:var(--mono);font-size:.68rem;color:var(--muted);cursor:pointer;background:none;border:none;letter-spacing:.06em;transition:color .2s}
+.reset-btn:hover{color:var(--text)}
+.playground-output{
+  background:#0a0e14;border-top:1px solid var(--border);
+  padding:1rem 1.25rem;font-family:var(--mono);font-size:.8rem;
+  color:#4ade80;line-height:1.7;min-height:60px;white-space:pre-wrap;
+}
+.output-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:.4rem}
+
+/* nav buttons */
+.lesson-nav{display:flex;justify-content:space-between;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.lesson-nav-btn{
+  display:flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;background:none;border:none;transition:color .2s;
+}
+.lesson-nav-btn:hover{color:var(--accent)}
+.lesson-nav-btn.next{flex-direction:row-reverse}
+
+/* ── PRACTICE PAGE ── */
+.practice-wrap{max-width:900px;margin:0 auto;padding:4rem}
+.practice-header{margin-bottom:3rem}
+.practice-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:4px;cursor:pointer;border:1px solid var(--border2);
+  color:var(--muted);background:none;transition:all .2s;
+}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(249,115,22,0.07)}
+.q-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:1.5rem;overflow:hidden;transition:border-color .2s}
+.q-card:hover{border-color:var(--border2)}
+.q-header{display:flex;align-items:flex-start;justify-content:space-between;padding:1.5rem;gap:1rem;cursor:pointer}
+.q-meta{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.q-num{font-family:var(--mono);font-size:.7rem;color:var(--muted2)}
+.q-diff{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .6rem;border-radius:3px}
+.diff-easy{background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.25)}
+.diff-medium{background:rgba(249,115,22,0.12);color:var(--accent);border:1px solid rgba(249,115,22,0.25)}
+.diff-hard{background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.25)}
+.q-topic-tag{font-family:var(--mono);font-size:.65rem;color:var(--muted2);background:var(--bg4);border:1px solid var(--border);padding:.18rem .6rem;border-radius:3px}
+.q-text{font-size:.95rem;font-weight:500;color:var(--text);line-height:1.6}
+.q-toggle{font-family:var(--mono);font-size:.7rem;color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:color .2s;background:none;border:none}
+.q-toggle:hover{color:var(--accent)}
+.q-body{display:none;border-top:1px solid var(--border)}
+.q-body.open{display:block}
+.q-try{padding:1.25rem 1.5rem;background:var(--bg2)}
+.q-try-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent3);margin-bottom:.6rem}
+.q-textarea{
+  width:100%;min-height:120px;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:6px;padding:1rem;outline:none;resize:vertical;
+  font-family:var(--mono);font-size:.8rem;color:var(--text);line-height:1.6;
+}
+.q-actions{display:flex;gap:.75rem;margin-top:.75rem;align-items:center}
+.q-run{
+  background:var(--accent3);color:#fff;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:4px;font-weight:700;transition:all .2s;
+}
+.q-run:hover{background:#059669}
+.q-reveal{
+  background:none;border:1px solid var(--border2);color:var(--muted);cursor:pointer;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.4rem .9rem;border-radius:4px;transition:all .2s;
+}
+.q-reveal:hover{border-color:var(--accent4);color:var(--accent4)}
+.q-output-box{
+  background:#0a0e14;border-radius:5px;padding:.75rem 1rem;margin-top:.75rem;
+  font-family:var(--mono);font-size:.78rem;color:#4ade80;line-height:1.6;
+  white-space:pre-wrap;display:none;
+}
+.q-output-box.show{display:block}
+.q-answer{padding:1.5rem;background:var(--bg2);border-top:1px solid var(--border);display:none}
+.q-answer.show{display:block}
+.q-answer-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent4);margin-bottom:.75rem}
+.q-answer p{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:.75rem}
+
+/* progress bar */
+.progress-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2.5rem}
+.progress-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
+.progress-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-bottom:.5rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#fbbf24);border-radius:3px;transition:width .5s ease;width:0%}
+.progress-text{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.progress-text span{color:var(--accent)}
+
+/* animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.cursor{animation:blink 1s infinite;color:var(--accent)}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hero-tag{animation:fadeInUp .5s ease both}
-.hero h1{animation:fadeInUp .5s .1s ease both}
-.hero-title{animation:fadeInUp .5s .2s ease both}
-.hero-bio{animation:fadeInUp .5s .3s ease both}
-.hero-cta{animation:fadeInUp .5s .4s ease both}
+.blink{animation:blink 1.2s infinite;color:var(--accent)}
+.fade-up{animation:fadeUp .5s ease both}
+.delay-1{animation-delay:.1s}
+.delay-2{animation-delay:.2s}
+.delay-3{animation-delay:.3s}
+.delay-4{animation-delay:.4s}
 
-section{padding:5.5rem 4rem;max-width:1100px;margin:0 auto}
-.section-label{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.75rem}
-.section-label::after{content:'';flex:1;max-width:80px;height:1px;background:var(--accent);opacity:.4}
-.section-title{font-size:1.9rem;font-weight:600;letter-spacing:-.02em;margin-bottom:2.5rem;color:var(--text)}
-
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.about-text p{color:var(--muted);margin-bottom:1.2rem;font-size:.98rem}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.4rem;position:relative;overflow:hidden}
-.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:.7}
-.stat-num{font-family:var(--mono);font-size:1.9rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.35rem}
-.stat-label{font-size:.78rem;color:var(--muted);letter-spacing:.03em}
-
-.skill-category{margin-bottom:2.2rem}
-.skill-cat-name{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.9rem}
-.skill-tags{display:flex;flex-wrap:wrap;gap:.55rem}
-.skill-tag{padding:.38rem .95rem;background:var(--bg3);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:.75rem;color:var(--text);transition:all .2s;cursor:default}
-.skill-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.04)}
-.skill-tag.accent{border-color:rgba(0,229,255,0.3);color:var(--accent)}
-.skill-tag.purple{border-color:rgba(124,58,237,0.4);color:#a78bfa}
-.skill-tag.green{border-color:rgba(16,185,129,0.4);color:#34d399}
-.skill-tag.amber{border-color:rgba(234,179,8,0.35);color:#fbbf24}
-
-.timeline{position:relative;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:0;top:8px;width:1px;height:calc(100% - 8px);background:linear-gradient(to bottom,var(--accent),transparent);opacity:.3}
-.exp-item{position:relative;margin-bottom:2.8rem;padding-bottom:2.8rem;border-bottom:1px solid var(--border)}
-.exp-item:last-child{border-bottom:none;margin-bottom:0}
-.exp-item::before{content:'';position:absolute;left:-2rem;top:8px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;flex-wrap:wrap;gap:.5rem}
-.exp-role{font-size:1.05rem;font-weight:600;color:var(--text)}
-.exp-date{font-family:var(--mono);font-size:.72rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:.28rem .7rem;border-radius:3px;white-space:nowrap}
-.exp-company{font-family:var(--mono);font-size:.82rem;color:var(--accent);margin-bottom:.9rem;opacity:.85}
-.exp-bullets{list-style:none;margin-bottom:1rem}
-.exp-bullets li{color:var(--muted);font-size:.9rem;line-height:1.75;padding-left:1.2rem;position:relative;margin-bottom:.3rem}
-.exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700}
-.exp-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
-.tech-pill{font-family:var(--mono);font-size:.68rem;padding:.2rem .6rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:3px;color:#a78bfa;letter-spacing:.03em}
-
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem}
-.project-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.6rem;position:relative;overflow:hidden;transition:all .3s}
-.project-card:hover{border-color:var(--accent);transform:translateY(-4px);background:var(--surface)}
-.project-card::before{content:attr(data-num);position:absolute;top:.8rem;right:1.2rem;font-family:var(--mono);font-size:2.8rem;font-weight:700;color:var(--border2);line-height:1;pointer-events:none}
-.project-name{font-size:1rem;font-weight:600;margin-bottom:.65rem;color:var(--text)}
-.project-tech{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
-.project-tech-tag{font-family:var(--mono);font-size:.65rem;padding:.18rem .55rem;background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.2);border-radius:3px;color:var(--accent)}
-.project-desc{font-size:.87rem;color:var(--muted);line-height:1.7}
-
-.edu-list{display:flex;flex-direction:column;gap:1.2rem}
-.edu-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:border-color .2s;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.edu-card:hover{border-color:var(--accent3)}
-.edu-degree{font-size:1rem;font-weight:600;margin-bottom:.3rem;color:var(--text)}
-.edu-school{font-family:var(--mono);font-size:.78rem;color:var(--accent3);margin-bottom:.25rem}
-.edu-note{font-size:.82rem;color:var(--muted);max-width:500px}
-.edu-year{font-family:var(--mono);font-size:.72rem;color:var(--muted);white-space:nowrap;padding:.3rem .7rem;background:var(--bg2);border:1px solid var(--border);border-radius:3px;align-self:flex-start}
-
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-.cert-card{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:1.2rem 1.4rem;transition:border-color .2s}
-.cert-card:hover{border-color:rgba(251,191,36,0.5)}
-.cert-name{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.3rem}
-.cert-issuer{font-family:var(--mono);font-size:.7rem;color:#fbbf24;opacity:.85}
-
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.contact-text{font-size:.98rem;color:var(--muted);line-height:1.85;margin-bottom:2rem}
-.contact-links{display:flex;flex-direction:column;gap:.9rem}
-.contact-link{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text);transition:all .2s}
-.contact-link:hover{border-color:var(--accent);color:var(--accent)}
-.contact-link-icon{width:34px;height:34px;border-radius:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-family:var(--mono)}
-.contact-link-info{flex:1}
-.contact-link-label{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
-.contact-link-val{font-size:.88rem;font-weight:500}
-.contact-form{display:flex;flex-direction:column;gap:.9rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.form-group{display:flex;flex-direction:column;gap:.38rem}
-.form-label{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
-.form-input,.form-textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:.7rem .95rem;color:var(--text);font-family:var(--sans);font-size:.88rem;transition:border-color .2s;outline:none;resize:none}
-.form-input:focus,.form-textarea:focus{border-color:var(--accent)}
-.form-textarea{min-height:110px}
-
-footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center}
-.footer-copy{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
-.footer-made{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.footer-made span{color:var(--accent)}
-
-.hero-inner{display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap}
-.hero-content{flex:1;min-width:280px}
-.hero-photo-wrap{flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.hero-photo{width:260px;height:260px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--accent);box-shadow:0 0 40px rgba(0,229,255,0.15),0 0 0 6px rgba(0,229,255,0.06);display:block}
-
-@media(max-width:768px){
-  nav{padding:1rem 1.5rem}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
   .nav-links{display:none}
-  .hero,section{padding-left:1.5rem;padding-right:1.5rem}
-  .hero-inner{flex-direction:column-reverse;gap:2rem}
-  .hero-photo{width:160px;height:160px}
-  .about-grid,.contact-inner{grid-template-columns:1fr;gap:2rem}
-  .form-row{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:.5rem;text-align:center}
-  .edu-card{flex-direction:column}
+  .home-hero,.home-features{padding-left:1.5rem;padding-right:1.5rem}
+  .tutorials-layout{grid-template-columns:1fr}
+  .tut-sidebar{display:none}
+  .tut-content{padding:2rem 1.5rem}
+  .about-hero{grid-template-columns:1fr;gap:2rem}
+  .about-photo{max-width:220px}
+  .about-stats-row{grid-template-columns:1fr 1fr}
+  .about-wrap{padding:3rem 1.5rem}
+  .practice-wrap{padding:2rem 1.5rem}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">AL<span class="cursor">_</span></div>
+  <div class="nav-brand">Data<span class="dot">Aly</span><span class="blink">_</span></div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="active" onclick="showPage('home',this)">Home</a></li>
+    <li><a href="#" onclick="showPage('about',this)">About</a></li>
+    <li><a href="#" onclick="showPage('tutorials',this)">Tutorials</a></li>
+    <li><a href="#" onclick="showPage('practice',this)">Practice</a></li>
   </ul>
+  <a href="#" class="nav-cta" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));return false">Start Learning →</a>
 </nav>
 
-<div class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-tag">Open to opportunities · Toronto, ON</div>
-      <h1><span class="name-dim">Hi, I'm</span><br>Ali Lordifar.</h1>
-      <div class="hero-title">// Senior Big Data Engineer &amp; ML Specialist</div>
-      <p class="hero-bio">I architect large-scale cloud data pipelines, real-time streaming systems, and machine learning solutions. Passionate about distributed computing, serverless architecture, and turning raw data into business intelligence.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        <a href="#projects" class="btn btn-outline">View Projects</a>
-      </div>
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <div class="home-hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-eyebrow fade-up">Free Big Data Education</div>
+    <h1 class="fade-up delay-1">
+      Learn.<br>
+      <span class="line2">Engineer.</span><br>
+      <span class="line3">Master Data.</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Hands-on tutorials in PySpark, SQL, and Big Data engineering — from absolute basics to production-grade patterns. Written by a Senior Data Engineer at CitiBank.
+    </p>
+    <div class="hero-actions fade-up delay-3">
+      <button class="btn btn-primary" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'))">Start with PySpark →</button>
+      <button class="btn btn-ghost" onclick="showPage('practice',document.querySelector('.nav-links a:nth-child(4)'))">Try Practice Questions</button>
     </div>
-    <div class="hero-photo-wrap">
-      <img class="hero-photo" src="https://i.postimg.cc/MH7CVgjm/IMG-0728.avif" alt="Ali Lordifar">
+    <div class="hero-stats fade-up delay-4">
+      <div class="stat"><div class="stat-n">30<span>+</span></div><div class="stat-l">Lessons</div></div>
+      <div class="stat"><div class="stat-n">50<span>+</span></div><div class="stat-l">Practice Qs</div></div>
+      <div class="stat"><div class="stat-n">100<span>%</span></div><div class="stat-l">Free</div></div>
+      <div class="stat"><div class="stat-n">8<span>yr</span></div><div class="stat-l">Industry Exp</div></div>
+    </div>
+  </div>
+
+  <div class="home-features">
+    <div class="section-tag">What you'll learn</div>
+    <h2 class="section-heading">Everything in one place</h2>
+    <div class="features-grid">
+      <div class="feature-card" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));loadLesson('pyspark-intro')">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-title">PySpark Fundamentals</div>
+        <p class="feature-desc">From RDDs to DataFrames, transformations, actions, schema — everything you need to start processing big data.</p>
+      </div>
+      <div class="feature-card" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));loadLesson('spark-sql')">
+        <span class="feature-icon">🗄️</span>
+        <div class="feature-title">Spark SQL & DataFrames</div>
+        <p class="feature-desc">Write expressive SQL on distributed datasets. Master joins, aggregations, window functions, and query optimization.</p>
+      </div>
+      <div class="feature-card" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));loadLesson('streaming')">
+        <span class="feature-icon">🌊</span>
+        <div class="feature-title">Streaming with Kafka</div>
+        <p class="feature-desc">Real-time data pipelines using Structured Streaming and Confluent Kafka. From ingestion to Snowflake.</p>
+      </div>
+      <div class="feature-card" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));loadLesson('etl')">
+        <span class="feature-icon">🔧</span>
+        <div class="feature-title">ETL Pipeline Design</div>
+        <p class="feature-desc">Build production-grade ETL frameworks. Patterns used at real companies like CitiBank and Shopify.</p>
+      </div>
+      <div class="feature-card" onclick="showPage('tutorials',document.querySelector('.nav-links a:nth-child(3)'));loadLesson('optimization')">
+        <span class="feature-icon">🚀</span>
+        <div class="feature-title">Performance & Optimization</div>
+        <p class="feature-desc">Partitioning, caching, broadcast joins, shuffle tuning — make your Spark jobs blazing fast.</p>
+      </div>
+      <div class="feature-card" onclick="showPage('practice',document.querySelector('.nav-links a:nth-child(4)'))">
+        <span class="feature-icon">🧠</span>
+        <div class="feature-title">Interview Practice</div>
+        <p class="feature-desc">Data engineering interview questions with hidden answers and a live code sandbox. Easy to Hard.</p>
+      </div>
     </div>
   </div>
 </div>
 
-<section id="about">
-  <div class="section-label">01. About</div>
-  <h2 class="section-title">Who I Am</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a Senior Big Data Engineer and Data Scientist with 8+ years of experience spanning cloud data engineering, machine learning research, and real-time streaming systems.</p>
-      <p>Currently working as AVP-level Senior Data Engineer at CitiBank, I design and operate AWS-native data lakes, Spark-on-EKS pipelines, and Confluent Kafka streaming infrastructure at enterprise scale.</p>
-      <p>I hold two Master's degrees — one in Computer Engineering (University of Guelph) and one in Information and Data Science (UC Berkeley, in progress) — plus multiple AWS certifications in cloud, analytics, and machine learning.</p>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Years of experience</div></div>
-      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">AWS certifications</div></div>
-      <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Master's degrees</div></div>
-      <div class="stat-card"><div class="stat-num">96%</div><div class="stat-label">Model accuracy achieved</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="section-label">02. Skills</div>
-  <h2 class="section-title">Tech Stack</h2>
-  <div class="skill-category">
-    <div class="skill-cat-name">Languages &amp; Frameworks</div>
-    <div class="skill-tags">
-      <span class="skill-tag accent">Python</span>
-      <span class="skill-tag accent">PySpark</span>
-      <span class="skill-tag accent">SQL</span>
-      <span class="skill-tag">FastAPI</span>
-      <span class="skill-tag">Flask</span>
-      <span class="skill-tag">Shell Scripting</span>
-      <span class="skill-tag">TensorFlow / Keras</span>
-      <span class="skill-tag">NumPy / Pandas</span>
-      <span class="skill-tag">Sklearn</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">Big Data &amp; Streaming</div>
-    <div class="skill-tags">
-      <span class="skill-tag purple">Apache Spark</span>
-      <span class="skill-tag purple">Confluent Kafka</span>
-      <span class="skill-tag purple">Apache Hadoop</span>
-      <span class="skill-tag purple">Amazon Kinesis</span>
-      <span class="skill-tag purple">Amazon EKS</span>
-      <span class="skill-tag purple">MWAA</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">Cloud &amp; Infrastructure</div>
-    <div class="skill-tags">
-      <span class="skill-tag green">AWS S3</span>
-      <span class="skill-tag green">AWS Glue</span>
-      <span class="skill-tag green">AWS Lambda</span>
-      <span class="skill-tag green">AWS SageMaker</span>
-      <span class="skill-tag green">AWS EC2</span>
-      <span class="skill-tag green">Snowflake</span>
-      <span class="skill-tag">Kubernetes</span>
-      <span class="skill-tag">Docker</span>
-      <span class="skill-tag">Jenkins</span>
-      <span class="skill-tag">OpenShift</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">ML &amp; Deep Learning</div>
-    <div class="skill-tags">
-      <span class="skill-tag amber">CNN / RNN</span>
-      <span class="skill-tag amber">XGBoost</span>
-      <span class="skill-tag amber">YOLO / SSD</span>
-      <span class="skill-tag amber">SVM</span>
-      <span class="skill-tag amber">Random Forests</span>
-      <span class="skill-tag amber">KNN / K-Means</span>
-      <span class="skill-tag">PostgreSQL</span>
-      <span class="skill-tag">Git / GitHub</span>
-      <span class="skill-tag">Bitbucket</span>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="section-label">03. Experience</div>
-  <h2 class="section-title">Work History</h2>
-  <div class="timeline">
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Senior Data Engineer (Assistant Vice President)</div>
-        <div class="exp-date">Nov 2022 — Present</div>
-      </div>
-      <div class="exp-company">CitiBank · Toronto, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Designed and deployed an AWS S3 Data Lake leveraging Spark on EKS for scalable processing and MWAA for orchestration.</li>
-        <li>Built real-time and near-real-time streaming pipelines using PySpark and Confluent Kafka, ingesting into Snowflake via S3.</li>
-        <li>Engineered a generic ETL framework in PySpark for transforming and loading data across diverse sources into AWS S3.</li>
-        <li>Developed a data streaming API to fully automate cloud onboarding processes.</li>
-        <li>Collaborated on OpenShift, Kubernetes, CI/CD, Snowflake, and AWS Glue integrations for system scalability.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">PySpark</span><span class="tech-pill">Confluent Kafka</span><span class="tech-pill">AWS S3</span><span class="tech-pill">Snowflake</span><span class="tech-pill">EKS</span><span class="tech-pill">MWAA</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">AWS Glue</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Data Scientist</div>
-        <div class="exp-date">Jun 2022 — Oct 2022</div>
-      </div>
-      <div class="exp-company">Eon Media · Toronto, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Developed deep learning and ML models; deployed parallel models on AWS behind a single endpoint.</li>
-        <li>Used AWS S3, SageMaker, and Lambda for cloud-based model training and serverless inference.</li>
-        <li>Built and managed serverless APIs for ML model inference at scale.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">SageMaker</span><span class="tech-pill">AWS Lambda</span><span class="tech-pill">S3</span><span class="tech-pill">Deep Learning</span><span class="tech-pill">Serverless</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Machine Learning Researcher</div>
-        <div class="exp-date">May 2020 — Sep 2021</div>
-      </div>
-      <div class="exp-company">EagleVision Systems · Kitchener, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Integrated AI strategies for "Automatic Curbside Waste Collection" (NSERC-sponsored), achieving 96% detection accuracy with YOLO/SSD.</li>
-        <li>Built CNN models for image classification; deployed joint depth estimation and object detection on Jetson TX2.</li>
-        <li>Integrated YOLOv3/v4 and SSD models on Microsoft Azure Kinect DK sensor.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">YOLOv3/v4</span><span class="tech-pill">SSD</span><span class="tech-pill">CNN</span><span class="tech-pill">TensorFlow</span><span class="tech-pill">Azure Kinect</span><span class="tech-pill">Jetson TX2</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Graduate Research Assistant</div>
-        <div class="exp-date">Jan 2020 — Sep 2021</div>
-      </div>
-      <div class="exp-company">University of Guelph · Guelph, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Developed ML models forecasting construction costs with 90%+ accuracy using advanced linear regression.</li>
-        <li>Built a COVID-19 X-ray classification CNN model with 92% accuracy.</li>
-        <li>Researched Kalman Filter, Extended Kalman Filter, and deep learning estimation theory.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">CNN</span><span class="tech-pill">Linear Regression</span><span class="tech-pill">Kalman Filter</span><span class="tech-pill">Python</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Data Scientist</div>
-        <div class="exp-date">Aug 2016 — Dec 2017</div>
-      </div>
-      <div class="exp-company">Aeen Naghsh Group · Shiraz, Iran</div>
-      <ul class="exp-bullets">
-        <li>Applied deep learning models to predict renovation time and cost for construction projects.</li>
-        <li>Cleaned and prepared large renovation datasets for ML model training.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">Deep Learning</span><span class="tech-pill">Python</span><span class="tech-pill">Data Cleaning</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-label">04. Projects</div>
-  <h2 class="section-title">Selected Work</h2>
-  <div class="projects-grid">
-    <div class="project-card" data-num="01">
-      <div class="project-name">PySpark Cloud Generic ETL Framework</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">PySpark</span><span class="project-tech-tag">Docker</span><span class="project-tech-tag">Kubernetes</span><span class="project-tech-tag">S3</span><span class="project-tech-tag">Kafka</span><span class="project-tech-tag">Snowflake</span>
-      </div>
-      <p class="project-desc">Reads Avro/CSV/Parquet from S3, on-prem, and local storage. Applies filters and transformations, publishes to Confluent Kafka, and stores in Snowflake with S3 redundancy.</p>
-    </div>
-    <div class="project-card" data-num="02">
-      <div class="project-name">COVID-19 X-Ray Classification Serverless API</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">TensorFlow</span><span class="project-tech-tag">Flask</span><span class="project-tech-tag">AWS Lambda</span><span class="project-tech-tag">API Gateway</span><span class="project-tech-tag">Cognito</span>
-      </div>
-      <p class="project-desc">CNN model achieving 92% classification accuracy on chest X-rays. Deployed as a serverless API via Flask + Zappa on AWS Lambda, with Amazon Cognito authentication.</p>
-    </div>
-    <div class="project-card" data-num="03">
-      <div class="project-name">Canada Renovation Cost Predictor</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">XGBoost</span><span class="project-tech-tag">Deep Learning</span><span class="project-tech-tag">Linear Regression</span><span class="project-tech-tag">Python</span>
-      </div>
-      <p class="project-desc">Scraped and engineered renovation cost data, trained Linear Regression, Deep Learning, and XGBoost models with L2 regularization, deployed for real-world prediction.</p>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="section-label">05. Education</div>
-  <h2 class="section-title">Academic Background</h2>
-  <div class="edu-list">
-    <div class="edu-card">
+<!-- ══════════════════════ ABOUT PAGE ══════════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-wrap">
+    <div class="about-hero">
       <div>
-        <div class="edu-degree">M.Sc. Information and Data Science</div>
-        <div class="edu-school">University of California, Berkeley</div>
-        <div class="edu-note">In progress — Berkeley, California, US</div>
-      </div>
-      <div class="edu-year">2026 – 2028</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">M.Sc. Computer Engineering</div>
-        <div class="edu-school">University of Guelph</div>
-        <div class="edu-note">Thesis: "Automated Curbside Waste Collection using Advanced Computer Vision Strategies"</div>
-      </div>
-      <div class="edu-year">2018 – 2020</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">B.Sc. Electrical and Communication Engineering</div>
-        <div class="edu-school">Fars Science and Research University</div>
-        <div class="edu-note">Final Project: "A Review on Space-Time Coding Techniques"</div>
-      </div>
-      <div class="edu-year">2010 – 2014</div>
-    </div>
-  </div>
-  <h3 style="font-size:1.1rem;font-weight:600;margin:3rem 0 1.5rem;color:var(--text)">Certifications</h3>
-  <div class="certs-grid">
-    <div class="cert-card"><div class="cert-name">AWS Certified Cloud Practitioner</div><div class="cert-issuer">Amazon Web Services · 2021</div></div>
-    <div class="cert-card"><div class="cert-name">AWS Certified Data Analytics Specialty</div><div class="cert-issuer">Amazon Web Services · 2022</div></div>
-    <div class="cert-card"><div class="cert-name">AWS Certified Machine Learning Specialty</div><div class="cert-issuer">Amazon Web Services · 2022</div></div>
-    <div class="cert-card"><div class="cert-name">TensorFlow Deep Learning with Python</div><div class="cert-issuer">Udemy Bootcamp</div></div>
-    <div class="cert-card"><div class="cert-name">Deep Learning &amp; Neural Networks</div><div class="cert-issuer">Coursera</div></div>
-    <div class="cert-card"><div class="cert-name">Complete Python Data Science Bootcamp</div><div class="cert-issuer">Udemy</div></div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="section-label">06. Contact</div>
-  <h2 class="section-title">Get In Touch</h2>
-  <div class="contact-inner">
-    <div>
-      <p class="contact-text">Interested in collaborating on a data engineering challenge, ML project, or just want to connect? My inbox is open.</p>
-      <div class="contact-links">
-        <a href="mailto:Ali.lordifar@gmail.com" class="contact-link">
-          <div class="contact-link-icon">✉</div>
-          <div class="contact-link-info"><div class="contact-link-label">Email</div><div class="contact-link-val">Ali.lordifar@gmail.com</div></div>
-        </a>
-        <a href="https://linkedin.com/in/ali-lordifar" class="contact-link">
-          <div class="contact-link-icon">in</div>
-          <div class="contact-link-info"><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/ali-lordifar</div></div>
-        </a>
-        <a href="https://github.com/alilordifar" class="contact-link">
-          <div class="contact-link-icon">⌥</div>
-          <div class="contact-link-info"><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/alilordifar</div></div>
-        </a>
-        <a href="https://www.ischool.berkeley.edu/people/mohammad-ali-lordifar" class="contact-link" target="_blank">
-          <div class="contact-link-icon" style="font-size:10px;font-weight:700;color:#fbbf24;background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.25)">UC</div>
-          <div class="contact-link-info"><div class="contact-link-label">UC Berkeley</div><div class="contact-link-val">ischool.berkeley.edu/people/mohammad-ali-lordifar</div></div>
-        </a>
-      </div>
-    </div>
-    <div class="contact-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Name</label>
-          <input class="form-input" type="text" placeholder="Jane Smith">
+        <div class="about-tag">The person behind DataAly</div>
+        <div class="about-name">Ali Lordifar</div>
+        <div class="about-role">// Senior Big Data Engineer · AVP at CitiBank · UC Berkeley MIDS</div>
+        <div class="about-bio">
+          <p>I'm a Senior Big Data Engineer with 8+ years of experience building large-scale data pipelines, real-time streaming systems, and machine learning solutions at companies like CitiBank, Shopify, and Eon Media.</p>
+          <p>I created DataAly because I believe great data engineering education should be free and practical — not hidden behind paywalls or filled with toy examples that don't reflect real production systems.</p>
+          <p>Every tutorial here is written from real experience. The patterns, pitfalls, and optimizations I share are things I've personally encountered building pipelines that process millions of events per day.</p>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="jane@company.com">
+        <div class="contact-row" style="margin-top:2rem">
+          <a href="mailto:Ali.lordifar@gmail.com" class="contact-chip"><span>Email</span> Ali.lordifar@gmail.com</a>
+          <a href="https://linkedin.com/in/ali-lordifar" class="contact-chip" target="_blank"><span>LinkedIn</span> ali-lordifar</a>
+          <a href="https://www.ischool.berkeley.edu/people/mohammad-ali-lordifar" class="contact-chip" target="_blank"><span>UC Berkeley</span> Profile</a>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <input class="form-input" type="text" placeholder="Data engineering opportunity">
+      <img class="about-photo" src="https://i.postimg.cc/MH7CVgjm/IMG-0728.avif" alt="Ali Lordifar" onerror="this.style.display='none'">
+    </div>
+
+    <div class="about-stats-row">
+      <div class="astat"><div class="astat-n">8+</div><div class="astat-l">Years Experience</div></div>
+      <div class="astat"><div class="astat-n">3</div><div class="astat-l">AWS Certifications</div></div>
+      <div class="astat"><div class="astat-n">2</div><div class="astat-l">Master's Degrees</div></div>
+      <div class="astat"><div class="astat-n">96%</div><div class="astat-l">Model Accuracy</div></div>
+    </div>
+
+    <div class="skills-section">
+      <h3>Tech Stack</h3>
+      <div class="skill-group"><div class="skill-group-name">Languages</div><div class="skill-pills"><span class="spill o">Python</span><span class="spill o">PySpark</span><span class="spill o">SQL</span><span class="spill">FastAPI</span><span class="spill">Flask</span><span class="spill">Shell</span></div></div>
+      <div class="skill-group"><div class="skill-group-name">Big Data & Streaming</div><div class="skill-pills"><span class="spill b">Apache Spark</span><span class="spill b">Confluent Kafka</span><span class="spill b">Hadoop</span><span class="spill b">Kinesis</span><span class="spill b">MWAA</span></div></div>
+      <div class="skill-group"><div class="skill-group-name">Cloud & Infra</div><div class="skill-pills"><span class="spill g">AWS S3</span><span class="spill g">Glue</span><span class="spill g">Lambda</span><span class="spill g">SageMaker</span><span class="spill g">Snowflake</span><span class="spill">Kubernetes</span><span class="spill">Docker</span></div></div>
+      <div class="skill-group"><div class="skill-group-name">ML / Deep Learning</div><div class="skill-pills"><span class="spill p">TensorFlow</span><span class="spill p">CNN/RNN</span><span class="spill p">XGBoost</span><span class="spill p">YOLO</span><span class="spill p">Sklearn</span></div></div>
+    </div>
+
+    <div class="exp-timeline">
+      <h3>Experience</h3>
+      <div class="exp-item2">
+        <div class="exp-role2">Senior Data Engineer (Assistant Vice President)</div>
+        <div class="exp-co">CitiBank</div>
+        <div class="exp-date2">Nov 2022 — Present · Toronto, ON</div>
+        <ul class="exp-pts">
+          <li>Designed AWS S3 Data Lake with Spark on EKS and MWAA orchestration</li>
+          <li>Built real-time Confluent Kafka → Snowflake streaming pipelines</li>
+          <li>Engineered generic PySpark ETL framework used across the org</li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
+      <div class="exp-item2">
+        <div class="exp-role2">Data Scientist</div>
+        <div class="exp-co">Eon Media</div>
+        <div class="exp-date2">Jun 2022 — Oct 2022 · Toronto, ON</div>
+        <ul class="exp-pts">
+          <li>Deployed parallel ML models on AWS behind a single endpoint</li>
+          <li>Built serverless inference APIs with Lambda + API Gateway</li>
+        </ul>
       </div>
-      <button class="btn btn-primary" style="align-self:flex-start">Send Message</button>
+      <div class="exp-item2">
+        <div class="exp-role2">Machine Learning Researcher</div>
+        <div class="exp-co">EagleVision Systems</div>
+        <div class="exp-date2">May 2020 — Sep 2021 · Kitchener, ON</div>
+        <ul class="exp-pts">
+          <li>Achieved 96% accuracy with YOLO/SSD for waste container detection</li>
+          <li>Deployed depth estimation + object detection on Jetson TX2</li>
+        </ul>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<footer>
-  <div class="footer-copy">© 2026 Ali Lordifar. All rights reserved.</div>
-  <div class="footer-made">Built with <span>♥</span> in Toronto, ON</div>
-</footer>
+<!-- ══════════════════════ TUTORIALS PAGE ══════════════════════ -->
+<div id="page-tutorials" class="page">
+  <div class="tutorials-layout">
+    <!-- SIDEBAR -->
+    <div class="tut-sidebar">
+      <div class="sidebar-label">Topics</div>
 
+      <div class="topic-group">
+        <div class="topic-header open" onclick="toggleTopic(this)">
+          <span><span class="topic-icon">⚡</span>PySpark</span>
+          <span class="topic-arrow">▶</span>
+        </div>
+        <div class="topic-children open">
+          <div class="sidebar-label" style="font-size:.58rem;padding:.3rem 1.5rem .1rem 2rem">Basics</div>
+          <span class="subtopic active" onclick="loadLesson('pyspark-intro',this)">Introduction to PySpark</span>
+          <span class="subtopic" onclick="loadLesson('rdd',this)">RDDs Explained</span>
+          <span class="subtopic" onclick="loadLesson('dataframe',this)">DataFrames & Schemas</span>
+          <span class="subtopic" onclick="loadLesson('transformations',this)">Transformations vs Actions</span>
+          <div class="sidebar-label" style="font-size:.58rem;padding:.3rem 1.5rem .1rem 2rem;margin-top:.5rem">Intermediate</div>
+          <span class="subtopic" onclick="loadLesson('spark-sql',this)">Spark SQL</span>
+          <span class="subtopic" onclick="loadLesson('joins',this)">Joins & Aggregations</span>
+          <span class="subtopic" onclick="loadLesson('window',this)">Window Functions</span>
+          <div class="sidebar-label" style="font-size:.58rem;padding:.3rem 1.5rem .1rem 2rem;margin-top:.5rem">Advanced</div>
+          <span class="subtopic" onclick="loadLesson('streaming',this)">Structured Streaming</span>
+          <span class="subtopic" onclick="loadLesson('etl',this)">ETL Pipeline Design</span>
+          <span class="subtopic" onclick="loadLesson('optimization',this)">Optimization & Tuning</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-header" onclick="toggleTopic(this)">
+          <span><span class="topic-icon">🗄️</span>SQL</span>
+          <span class="topic-arrow">▶</span>
+        </div>
+        <div class="topic-children">
+          <span class="subtopic" onclick="loadLesson('sql-basics',this)">SQL Basics</span>
+          <span class="subtopic" onclick="loadLesson('sql-joins',this)">Joins Deep Dive</span>
+          <span class="subtopic" onclick="loadLesson('sql-window',this)">Window Functions</span>
+          <span class="subtopic" onclick="loadLesson('sql-perf',this)">Query Performance</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-header" onclick="toggleTopic(this)">
+          <span><span class="topic-icon">☁️</span>AWS Data Engineering</span>
+          <span class="topic-arrow">▶</span>
+        </div>
+        <div class="topic-children">
+          <span class="subtopic" onclick="loadLesson('s3',this)">S3 Data Lake Design</span>
+          <span class="subtopic" onclick="loadLesson('glue',this)">AWS Glue</span>
+          <span class="subtopic" onclick="loadLesson('kafka-aws',this)">Kafka on AWS</span>
+        </div>
+      </div>
+
+      <div class="topic-group">
+        <div class="topic-header" onclick="toggleTopic(this)">
+          <span><span class="topic-icon">🌊</span>Streaming</span>
+          <span class="topic-arrow">▶</span>
+        </div>
+        <div class="topic-children">
+          <span class="subtopic" onclick="loadLesson('kafka-intro',this)">Kafka Fundamentals</span>
+          <span class="subtopic" onclick="loadLesson('spark-streaming',this)">Spark Streaming</span>
+          <span class="subtopic" onclick="loadLesson('snowflake',this)">Snowflake Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="tut-content" id="lesson-content">
+      <!-- Dynamically rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ PRACTICE PAGE ══════════════════════ -->
+<div id="page-practice" class="page">
+  <div class="practice-wrap">
+    <div class="practice-header">
+      <div class="section-tag">Interview Prep</div>
+      <h2 class="section-heading">Practice Questions</h2>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-title">Your Progress</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text"><span id="progress-count">0</span> of <span id="progress-total">0</span> questions attempted</div>
+    </div>
+
+    <div class="practice-filters">
+      <button class="filter-btn active" onclick="filterQ('all',this)">All</button>
+      <button class="filter-btn" onclick="filterQ('easy',this)">🟢 Easy</button>
+      <button class="filter-btn" onclick="filterQ('medium',this)">🟡 Medium</button>
+      <button class="filter-btn" onclick="filterQ('hard',this)">🔴 Hard</button>
+      <button class="filter-btn" onclick="filterQ('pyspark',this)">⚡ PySpark</button>
+      <button class="filter-btn" onclick="filterQ('sql',this)">🗄️ SQL</button>
+      <button class="filter-btn" onclick="filterQ('streaming',this)">🌊 Streaming</button>
+    </div>
+
+    <div id="questions-container"></div>
+  </div>
+</div>
+
+<script>
+// ─── PAGE NAVIGATION ───
+function showPage(name, linkEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (linkEl) linkEl.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function toggleTopic(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+// ─── LESSONS DATA ───
+const lessons = {
+  'pyspark-intro': {
+    breadcrumb: 'PySpark › Basics',
+    title: 'Introduction to PySpark',
+    desc: 'PySpark is the Python API for Apache Spark — a powerful distributed computing engine. In this lesson, you\'ll understand what PySpark is, why it exists, and how it fits into the modern data stack.',
+    sections: [
+      {
+        title: 'What is Apache Spark?',
+        content: `Apache Spark is an open-source, distributed data processing engine designed for speed and ease of use. Unlike Hadoop MapReduce which writes intermediate results to disk, Spark keeps data <strong style="color:var(--accent)">in-memory</strong>, making it 10–100x faster for many workloads.`,
+        list: ['Distributed: runs across a cluster of machines','In-memory processing: much faster than disk-based systems','Unified engine: batch, streaming, ML, graph all in one','PySpark: the Python API that lets you write Spark in Python']
+      },
+      {
+        title: 'Spark Architecture',
+        content: 'Every Spark application has a <strong style="color:var(--accent)">Driver</strong> and one or more <strong style="color:var(--accent)">Executors</strong>.',
+        callout: { type: '', label: 'Key Concept', text: 'Driver Program: The main process that controls the application, creates the SparkContext, and coordinates the Executors. Executors: Worker processes that run on cluster nodes, execute tasks, and store data.' }
+      },
+      {
+        title: 'Your First PySpark Session',
+        content: 'Every PySpark program starts by creating a SparkSession — the unified entry point for all Spark functionality.',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession
+
+# Create a SparkSession
+spark = SparkSession.builder \\
+    .appName("DataAly First App") \\
+    .master("local[*]") \\
+    .getOrCreate()
+
+# Check version
+print(f"Spark version: {spark.version}")
+
+# Create a simple DataFrame
+data = [("Alice", 34, "Engineer"),
+        ("Bob", 28, "Analyst"),
+        ("Carol", 41, "Manager")]
+
+columns = ["name", "age", "role"]
+df = spark.createDataFrame(data, columns)
+
+# Show the DataFrame
+df.show()
+
+# Print schema
+df.printSchema()` },
+        playground: { lang: 'python', default: `# Try creating your own DataFrame!
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("MyApp").getOrCreate()
+
+# Modify this data:
+data = [("Alice", 34), ("Bob", 28), ("Carol", 41)]
+df = spark.createDataFrame(data, ["name", "age"])
+df.show()
+print(f"Row count: {df.count()}")` }
+      },
+      {
+        title: 'SparkContext vs SparkSession',
+        content: 'In older Spark (< 2.0), you\'d use SparkContext. In modern Spark, SparkSession wraps everything.',
+        callout: { type: 'blue', label: 'Modern Best Practice', text: 'Always use SparkSession in Spark 2.0+. It internally creates a SparkContext for you. Access it via spark.sparkContext if needed.' }
+      }
+    ],
+    next: 'rdd', nextLabel: 'RDDs Explained'
+  },
+
+  'rdd': {
+    breadcrumb: 'PySpark › Basics',
+    title: 'RDDs — Resilient Distributed Datasets',
+    desc: 'RDDs are the fundamental data structure of Spark. Understanding them builds the intuition for how Spark thinks about data, even if you mostly use DataFrames today.',
+    sections: [
+      {
+        title: 'What is an RDD?',
+        content: 'An RDD (Resilient Distributed Dataset) is an immutable, distributed collection of objects. "Resilient" means it can recover from node failures by recomputing lost partitions.',
+        list: ['Immutable: once created, cannot be changed','Distributed: partitioned across the cluster','Lazy: transformations are not computed until an action is called','Fault-tolerant: lost partitions are recomputed from lineage']
+      },
+      {
+        title: 'Creating RDDs',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession
+sc = SparkSession.builder.getOrCreate().sparkContext
+
+# Method 1: Parallelize a Python collection
+rdd1 = sc.parallelize([1, 2, 3, 4, 5])
+
+# Method 2: From a text file
+# rdd2 = sc.textFile("s3://my-bucket/data.txt")
+
+# Method 3: From existing RDD
+rdd3 = rdd1.map(lambda x: x * 2)
+
+# How many partitions?
+print(f"Partitions: {rdd1.getNumPartitions()}")
+
+# Actions trigger execution
+print(rdd1.collect())   # [1, 2, 3, 4, 5]
+print(rdd3.collect())   # [2, 4, 6, 8, 10]` },
+        playground: { lang: 'python', default: `# RDD Transformations Practice
+# Try modifying the transformations below:
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Simulating RDD operations in Python:
+rdd = numbers
+
+# map: apply function to each element
+doubled = list(map(lambda x: x * 2, rdd))
+print("Doubled:", doubled)
+
+# filter: keep elements matching condition
+evens = list(filter(lambda x: x % 2 == 0, rdd))
+print("Evens:", evens)
+
+# reduce: aggregate to single value
+from functools import reduce
+total = reduce(lambda a, b: a + b, rdd)
+print("Sum:", total)` }
+      },
+      {
+        title: 'Transformations vs Actions',
+        content: 'This is one of the most important concepts in Spark.',
+        callout: { type: '', label: 'Transformations (Lazy)', text: 'map(), filter(), flatMap(), groupByKey(), reduceByKey() — these return a new RDD and do NOT execute immediately.' },
+        callout2: { type: 'green', label: 'Actions (Eager)', text: 'collect(), count(), first(), take(n), reduce(), saveAsTextFile() — these trigger actual computation.' }
+      },
+      {
+        title: 'RDD vs DataFrame',
+        content: 'When should you use each?',
+        list: ['Use DataFrames for most cases — they\'re optimized by Catalyst query planner','Use RDDs when you need fine-grained control over low-level operations','DataFrames are faster for structured data with a known schema','RDDs are better for unstructured data or complex Python object manipulation']
+      }
+    ],
+    prev: 'pyspark-intro', prevLabel: 'Introduction to PySpark',
+    next: 'dataframe', nextLabel: 'DataFrames & Schemas'
+  },
+
+  'dataframe': {
+    breadcrumb: 'PySpark › Basics',
+    title: 'DataFrames & Schemas',
+    desc: 'DataFrames are the primary abstraction in modern PySpark. They\'re distributed tables with named columns and a defined schema — think pandas, but at scale.',
+    sections: [
+      {
+        title: 'Creating DataFrames',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+
+spark = SparkSession.builder.appName("DataFrames").getOrCreate()
+
+# Method 1: From Python list with inferred schema
+data = [("Alice", 34, 85000.0), ("Bob", 28, 72000.0)]
+df = spark.createDataFrame(data, ["name", "age", "salary"])
+
+# Method 2: Explicit schema (RECOMMENDED in production)
+schema = StructType([
+    StructField("name",   StringType(),  nullable=False),
+    StructField("age",    IntegerType(), nullable=True),
+    StructField("salary", DoubleType(),  nullable=True)
+])
+df2 = spark.createDataFrame(data, schema)
+
+# Method 3: From CSV/Parquet
+# df3 = spark.read.option("header", True).csv("s3://bucket/file.csv")
+# df4 = spark.read.parquet("s3://bucket/data.parquet")
+
+df2.printSchema()
+df2.show()` },
+        playground: { lang: 'python', default: `# Practice: Create a DataFrame with explicit schema
+# Simulate with Python dicts:
+
+schema = ["employee_id", "name", "department", "salary"]
+data = [
+    (1, "Alice",   "Engineering", 95000),
+    (2, "Bob",     "Marketing",   72000),
+    (3, "Carol",   "Engineering", 88000),
+    (4, "David",   "HR",          65000),
+    (5, "Eve",     "Engineering", 102000),
+]
+
+# Create "DataFrame" simulation:
+import json
+print("Schema:", schema)
+print("\\nData:")
+for row in data:
+    print(dict(zip(schema, row)))
+
+# Filter Engineering dept
+eng = [r for r in data if r[2] == "Engineering"]
+print(f"\\nEngineering count: {len(eng)}")
+avg_sal = sum(r[3] for r in eng) / len(eng)
+print(f"Avg Engineering salary: ${avg_sal:,.0f}")` }
+      },
+      {
+        title: 'Common DataFrame Operations',
+        code: { lang: 'python', content: `from pyspark.sql.functions import col, avg, count, desc, when, lit
+
+# SELECT specific columns
+df.select("name", "salary").show()
+
+# FILTER rows
+df.filter(col("salary") > 80000).show()
+df.where("age > 30").show()  # SQL-style
+
+# ADD new column
+df.withColumn("salary_k", col("salary") / 1000).show()
+
+# RENAME column
+df.withColumnRenamed("salary", "annual_pay")
+
+# CONDITIONAL column
+df.withColumn("level",
+    when(col("salary") > 90000, "Senior")
+    .when(col("salary") > 70000, "Mid")
+    .otherwise("Junior")
+).show()
+
+# GROUP BY + aggregate
+df.groupBy("department") \\
+  .agg(
+      count("*").alias("headcount"),
+      avg("salary").alias("avg_salary")
+  ) \\
+  .orderBy(desc("avg_salary")) \\
+  .show()` }
+      }
+    ],
+    prev: 'rdd', prevLabel: 'RDDs Explained',
+    next: 'transformations', nextLabel: 'Transformations vs Actions'
+  },
+
+  'transformations': {
+    breadcrumb: 'PySpark › Basics',
+    title: 'Transformations vs Actions',
+    desc: 'The lazy evaluation model is what makes Spark so powerful. Understanding the difference between transformations and actions is essential to writing efficient PySpark code.',
+    sections: [
+      {
+        title: 'Lazy Evaluation Explained',
+        content: 'When you call a transformation on a DataFrame, Spark does NOT immediately execute it. Instead, it builds a <strong style="color:var(--accent)">DAG (Directed Acyclic Graph)</strong> — a logical plan. Execution only happens when you call an action.',
+        callout: { type: 'blue', label: 'Why Lazy?', text: 'Spark can optimize the entire chain of transformations before running anything. It may reorder operations, combine steps, or skip unnecessary work entirely using the Catalyst query optimizer.' }
+      },
+      {
+        title: 'Transformation Examples',
+        code: { lang: 'python', content: `# NARROW transformations (no shuffle needed)
+df.select("name", "age")           # project columns
+df.filter(col("age") > 30)         # filter rows
+df.withColumn("bonus", col("salary") * 0.1)
+df.map(lambda r: r.name.upper())   # RDD map
+
+# WIDE transformations (trigger shuffle across network)
+df.groupBy("dept").count()          # group + aggregate
+df.join(other_df, "id", "inner")    # join
+df.distinct()                       # deduplicate
+df.repartition(10)                  # repartition
+
+# None of the above runs until...
+# ACTION: triggers execution
+df.show()           # print first 20 rows
+df.count()          # count rows
+df.collect()        # bring all data to driver (careful!)
+df.first()          # first row
+df.write.parquet("s3://bucket/output/")  # write` }
+      },
+      {
+        title: 'Viewing the Execution Plan',
+        code: { lang: 'python', content: `# See what Spark PLANS to do (before execution)
+df.filter(col("age") > 30) \\
+  .groupBy("dept") \\
+  .agg(avg("salary")) \\
+  .explain()
+
+# explain(True) shows all 4 plan stages:
+# 1. Parsed Logical Plan
+# 2. Analyzed Logical Plan
+# 3. Optimized Logical Plan   ← Catalyst at work
+# 4. Physical Plan            ← What actually runs` },
+        playground: { lang: 'python', default: `# Simulate Spark lazy evaluation in Python
+# Build a pipeline and execute only at the end:
+
+data = [
+    {"name": "Alice",   "dept": "Eng", "salary": 95000, "age": 34},
+    {"name": "Bob",     "dept": "Mkt", "salary": 72000, "age": 28},
+    {"name": "Carol",   "dept": "Eng", "salary": 88000, "age": 41},
+    {"name": "David",   "dept": "HR",  "salary": 65000, "age": 25},
+    {"name": "Eve",     "dept": "Eng", "salary": 102000,"age": 38},
+]
+
+# TRANSFORMATIONS (lazy - just building the plan)
+step1 = lambda d: [r for r in d if r["age"] > 30]
+step2 = lambda d: [r for r in d if r["dept"] == "Eng"]
+step3 = lambda d: sorted(d, key=lambda r: -r["salary"])
+
+# ACTION (triggers execution of all steps)
+result = step3(step2(step1(data)))
+
+print("Engineers over 30, sorted by salary:")
+for r in result:
+    print(f"  {r['name']}: ${r['salary']:,}")` }
+      }
+    ],
+    prev: 'dataframe', prevLabel: 'DataFrames & Schemas',
+    next: 'spark-sql', nextLabel: 'Spark SQL'
+  },
+
+  'spark-sql': {
+    breadcrumb: 'PySpark › Intermediate',
+    title: 'Spark SQL',
+    desc: 'Spark SQL lets you run SQL queries directly against DataFrames. For many engineers, it\'s the fastest path to complex analytics on big data.',
+    sections: [
+      {
+        title: 'Running SQL on DataFrames',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("SparkSQL").getOrCreate()
+
+# Register DataFrame as a temporary SQL view
+df.createOrReplaceTempView("employees")
+
+# Now query it with SQL!
+result = spark.sql("""
+    SELECT
+        department,
+        COUNT(*)         AS headcount,
+        AVG(salary)      AS avg_salary,
+        MAX(salary)      AS max_salary
+    FROM employees
+    WHERE age > 25
+    GROUP BY department
+    ORDER BY avg_salary DESC
+""")
+
+result.show()
+
+# Mix SQL and DataFrame API freely:
+result.filter(col("headcount") > 2).show()` },
+        playground: { lang: 'sql', default: `-- Practice SQL query writing:
+-- Imagine a table: employees(id, name, dept, salary, hire_year)
+
+SELECT
+    dept,
+    COUNT(*)          AS team_size,
+    AVG(salary)       AS avg_salary,
+    MIN(hire_year)    AS earliest_hire
+FROM employees
+WHERE salary > 60000
+GROUP BY dept
+HAVING COUNT(*) >= 2
+ORDER BY avg_salary DESC;
+
+-- Try modifying:
+-- 1. Change the salary filter
+-- 2. Add another aggregation (e.g., MAX(salary))
+-- 3. Remove the HAVING clause` }
+      },
+      {
+        title: 'Global vs Temp Views',
+        code: { lang: 'python', content: `# Temp view: only visible in current SparkSession
+df.createOrReplaceTempView("employees")
+
+# Global temp view: visible across SparkSessions
+df.createOrReplaceGlobalTempView("employees_global")
+
+# To query global temp view:
+spark.sql("SELECT * FROM global_temp.employees_global")` }
+      },
+      {
+        title: 'Spark SQL vs DataFrame API',
+        content: 'Both compile to the same physical execution plan after Catalyst optimization. Use whichever is more readable for your use case.',
+        callout: { type: 'green', label: 'Pro Tip', text: 'SQL is often more readable for complex analytics with many aggregations and joins. DataFrame API is better for programmatic, conditional transformations.' }
+      }
+    ],
+    prev: 'transformations', prevLabel: 'Transformations vs Actions',
+    next: 'joins', nextLabel: 'Joins & Aggregations'
+  },
+
+  'joins': {
+    breadcrumb: 'PySpark › Intermediate',
+    title: 'Joins & Aggregations',
+    desc: 'Joins in distributed systems are expensive but essential. Master the different join types and optimization strategies to avoid performance pitfalls at scale.',
+    sections: [
+      {
+        title: 'Join Types',
+        code: { lang: 'python', content: `# Sample DataFrames
+employees = spark.createDataFrame([
+    (1, "Alice", 10), (2, "Bob", 20), (3, "Carol", 10)
+], ["emp_id", "name", "dept_id"])
+
+departments = spark.createDataFrame([
+    (10, "Engineering"), (20, "Marketing"), (30, "HR")
+], ["dept_id", "dept_name"])
+
+# INNER join (only matching rows)
+employees.join(departments, "dept_id", "inner").show()
+
+# LEFT join (all employees, even without dept)
+employees.join(departments, "dept_id", "left").show()
+
+# BROADCAST join (small table fits in memory - MUCH faster)
+from pyspark.sql.functions import broadcast
+employees.join(broadcast(departments), "dept_id").show()
+#         ↑ tells Spark to send departments to all executors
+#           avoids expensive shuffle!` },
+        playground: { lang: 'python', default: `# Simulate joins in Python:
+employees = [
+    {"id": 1, "name": "Alice",  "dept_id": 10},
+    {"id": 2, "name": "Bob",    "dept_id": 20},
+    {"id": 3, "name": "Carol",  "dept_id": 10},
+    {"id": 4, "name": "David",  "dept_id": 99},  # no matching dept!
+]
+
+departments = [
+    {"dept_id": 10, "name": "Engineering"},
+    {"dept_id": 20, "name": "Marketing"},
+    {"dept_id": 30, "name": "HR"},
+]
+
+# Build a lookup dict (like broadcast join)
+dept_lookup = {d["dept_id"]: d["name"] for d in departments}
+
+# INNER join simulation
+inner = [
+    {**e, "dept_name": dept_lookup[e["dept_id"]]}
+    for e in employees if e["dept_id"] in dept_lookup
+]
+print("INNER JOIN:")
+for r in inner: print(f"  {r['name']} → {r['dept_name']}")
+
+# LEFT join simulation
+left = [
+    {**e, "dept_name": dept_lookup.get(e["dept_id"], "N/A")}
+    for e in employees
+]
+print("\\nLEFT JOIN:")
+for r in left: print(f"  {r['name']} → {r['dept_name']}")` }
+      },
+      {
+        title: 'Aggregations',
+        code: { lang: 'python', content: `from pyspark.sql.functions import count, avg, sum, max, min, collect_list, countDistinct
+
+df.groupBy("department").agg(
+    count("*").alias("headcount"),
+    avg("salary").alias("avg_sal"),
+    sum("salary").alias("total_payroll"),
+    max("salary").alias("top_salary"),
+    countDistinct("location").alias("num_offices"),
+    collect_list("name").alias("team_members")
+).show()
+
+# Multiple groupBy keys
+df.groupBy("department", "level").agg(
+    count("*").alias("count"),
+    avg("salary").alias("avg_sal")
+).show()` }
+      }
+    ],
+    prev: 'spark-sql', prevLabel: 'Spark SQL',
+    next: 'window', nextLabel: 'Window Functions'
+  },
+
+  'window': {
+    breadcrumb: 'PySpark › Intermediate',
+    title: 'Window Functions',
+    desc: 'Window functions let you compute values across rows related to the current row — like running totals, rankings, and moving averages — without collapsing your DataFrame.',
+    sections: [
+      {
+        title: 'Window Specification',
+        code: { lang: 'python', content: `from pyspark.sql.functions import row_number, rank, dense_rank, lag, lead, avg, sum
+from pyspark.sql.window import Window
+
+# Define a window: partitioned by dept, ordered by salary desc
+w = Window.partitionBy("department").orderBy(col("salary").desc())
+
+df.withColumn("rank",         rank().over(w)) \\
+  .withColumn("dense_rank",   dense_rank().over(w)) \\
+  .withColumn("row_number",   row_number().over(w)) \\
+  .show()
+
+# Running total within department
+w2 = Window.partitionBy("department").orderBy("hire_date").rowsBetween(Window.unboundedPreceding, Window.currentRow)
+df.withColumn("running_salary_total", sum("salary").over(w2)).show()
+
+# LAG/LEAD: access previous/next row
+w3 = Window.partitionBy("dept").orderBy("hire_date")
+df.withColumn("prev_salary",  lag("salary", 1).over(w3)) \\
+  .withColumn("next_salary",  lead("salary", 1).over(w3)) \\
+  .show()` },
+        playground: { lang: 'python', default: `# Simulate window functions in Python:
+data = [
+    {"name": "Alice",   "dept": "Eng", "salary": 95000},
+    {"name": "Bob",     "dept": "Mkt", "salary": 72000},
+    {"name": "Carol",   "dept": "Eng", "salary": 88000},
+    {"name": "David",   "dept": "Eng", "salary": 102000},
+    {"name": "Eve",     "dept": "Mkt", "salary": 68000},
+]
+
+# Group by dept, then rank by salary:
+from itertools import groupby
+grouped = {}
+for r in data:
+    grouped.setdefault(r["dept"], []).append(r)
+
+print("Salary Rankings by Department:")
+for dept, members in sorted(grouped.items()):
+    sorted_members = sorted(members, key=lambda x: -x["salary"])
+    for i, m in enumerate(sorted_members):
+        print(f"  [{dept}] Rank {i+1}: {m['name']} — ${m['salary']:,}")` }
+      },
+      {
+        title: 'Rank vs Dense Rank vs Row Number',
+        callout: { type: 'blue', label: 'The difference', text: 'rank(): gaps in ranking for ties (1,2,2,4). dense_rank(): no gaps (1,2,2,3). row_number(): always unique (1,2,3,4). Use dense_rank() for most leaderboard scenarios.' }
+      }
+    ],
+    prev: 'joins', prevLabel: 'Joins & Aggregations',
+    next: 'streaming', nextLabel: 'Structured Streaming'
+  },
+
+  'optimization': {
+    breadcrumb: 'PySpark › Advanced',
+    title: 'Performance & Optimization',
+    desc: 'When you\'re processing terabytes, small tuning decisions have massive impact. Here are the patterns I use at CitiBank to keep Spark jobs fast.',
+    sections: [
+      {
+        title: 'Partitioning Strategy',
+        content: 'Partitioning is how Spark splits data across the cluster. Wrong partitioning = slow jobs.',
+        code: { lang: 'python', content: `# Check current partition count
+print(df.rdd.getNumPartitions())
+
+# Rule of thumb: 2-4 partitions per CPU core
+# For files: aim for 128MB-256MB per partition
+
+# Repartition: full shuffle (use when increasing partitions)
+df_repart = df.repartition(200)
+
+# Repartition by column (colocates related data)
+df_repart = df.repartition(50, "customer_id")
+
+# Coalesce: reduces partitions WITHOUT full shuffle (faster)
+df_small = df.coalesce(10)  # only for reducing partitions
+
+# When writing:
+df.repartition(1).write.parquet("s3://bucket/small_output/")  # single file
+df.repartition("year","month").write.partitionBy("year","month") \\
+  .parquet("s3://bucket/partitioned/")  # hive-style partitioning` }
+      },
+      {
+        title: 'Caching & Persistence',
+        code: { lang: 'python', content: `from pyspark import StorageLevel
+
+# Cache in memory (default)
+df.cache()           # = MEMORY_AND_DISK
+df.persist()         # same
+
+# More control:
+df.persist(StorageLevel.MEMORY_ONLY)          # fastest, may recompute
+df.persist(StorageLevel.MEMORY_AND_DISK)      # spills to disk if needed
+df.persist(StorageLevel.DISK_ONLY)            # when too big for memory
+
+# ALWAYS cache DataFrames you use multiple times:
+df_filtered = df.filter(col("active") == True).cache()
+count1 = df_filtered.count()               # triggers computation + caches
+count2 = df_filtered.groupBy("dept").count()  # reads from cache (fast!)
+
+# Release when done:
+df_filtered.unpersist()` }
+      },
+      {
+        title: 'Avoiding Shuffles',
+        callout: { type: '', label: 'Most expensive operation', text: 'Shuffles happen during: groupBy, join, distinct, repartition. They move data across the network. Minimize them!' },
+        code: { lang: 'python', content: `# ❌ Slow: groupByKey causes huge shuffle
+rdd.groupByKey().mapValues(list)
+
+# ✅ Fast: reduceByKey combines on each partition FIRST
+rdd.reduceByKey(lambda a, b: a + b)
+
+# ❌ Slow: regular join shuffles both sides
+big_df.join(small_df, "id")
+
+# ✅ Fast: broadcast join sends small_df to all nodes
+from pyspark.sql.functions import broadcast
+big_df.join(broadcast(small_df), "id")
+# Use when one table < 10MB (configurable via spark.sql.autoBroadcastJoinThreshold)` }
+      },
+      {
+        title: 'Key Config Parameters',
+        code: { lang: 'python', content: `spark = SparkSession.builder \\
+    .config("spark.sql.shuffle.partitions", "200")       # default 200, tune to data size
+    .config("spark.executor.memory", "8g")
+    .config("spark.executor.cores", "4")
+    .config("spark.driver.memory", "4g")
+    .config("spark.sql.autoBroadcastJoinThreshold", "10485760")  # 10MB
+    .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    .getOrCreate()` }
+      }
+    ],
+    prev: 'etl', prevLabel: 'ETL Pipeline Design'
+  },
+
+  'etl': {
+    breadcrumb: 'PySpark › Advanced',
+    title: 'ETL Pipeline Design',
+    desc: 'Building a generic, production-grade ETL framework that can handle any data source and format — exactly the kind of system we run at CitiBank.',
+    sections: [
+      {
+        title: 'Generic ETL Architecture',
+        callout: { type: 'blue', label: 'The Pattern', text: 'Extract → Validate → Transform → Load. Each step is configurable, testable, and reusable. Your pipeline reads a config file, not hardcoded logic.' }
+      },
+      {
+        title: 'Generic Reader',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession, DataFrame
+from typing import Dict
+
+def read_data(spark: SparkSession, config: Dict) -> DataFrame:
+    """Generic reader supporting CSV, Parquet, Avro, JSON, Kafka"""
+    fmt = config["format"].lower()
+    source = config["source"]
+
+    reader = spark.read
+
+    if fmt == "csv":
+        return reader.option("header", True) \\
+                     .option("inferSchema", True) \\
+                     .csv(source)
+    elif fmt == "parquet":
+        return reader.parquet(source)
+    elif fmt == "avro":
+        return reader.format("avro").load(source)
+    elif fmt == "json":
+        return reader.json(source)
+    elif fmt == "kafka":
+        return spark.readStream \\
+                    .format("kafka") \\
+                    .option("kafka.bootstrap.servers", config["brokers"]) \\
+                    .option("subscribe", config["topic"]) \\
+                    .load()
+    else:
+        raise ValueError(f"Unsupported format: {fmt}")
+
+# Usage:
+config = {"format": "parquet", "source": "s3://bucket/raw/"}
+df = read_data(spark, config)` }
+      },
+      {
+        title: 'Generic Transformer',
+        code: { lang: 'python', content: `from pyspark.sql.functions import col, to_timestamp, lit, trim, upper
+
+def apply_transformations(df: DataFrame, rules: list) -> DataFrame:
+    """Apply a list of transformation rules to a DataFrame"""
+    for rule in rules:
+        op = rule["operation"]
+
+        if op == "rename":
+            df = df.withColumnRenamed(rule["from"], rule["to"])
+        elif op == "cast":
+            df = df.withColumn(rule["column"], col(rule["column"]).cast(rule["type"]))
+        elif op == "filter":
+            df = df.filter(rule["condition"])
+        elif op == "drop_nulls":
+            df = df.dropna(subset=rule.get("columns", None))
+        elif op == "trim":
+            df = df.withColumn(rule["column"], trim(col(rule["column"])))
+        elif op == "upper":
+            df = df.withColumn(rule["column"], upper(col(rule["column"])))
+        elif op == "add_timestamp":
+            df = df.withColumn(rule["column"], to_timestamp(col(rule["column"]), rule["format"]))
+
+    return df
+
+# Config-driven:
+rules = [
+    {"operation": "rename",      "from": "cust_id",    "to": "customer_id"},
+    {"operation": "cast",        "column": "amount",   "type": "double"},
+    {"operation": "trim",        "column": "name"},
+    {"operation": "drop_nulls",  "columns": ["customer_id", "amount"]},
+]
+df_clean = apply_transformations(df, rules)` }
+      }
+    ],
+    prev: 'streaming', prevLabel: 'Structured Streaming',
+    next: 'optimization', nextLabel: 'Optimization & Tuning'
+  },
+
+  'streaming': {
+    breadcrumb: 'PySpark › Advanced',
+    title: 'Structured Streaming',
+    desc: 'Structured Streaming extends the DataFrame API to real-time data. It treats a live data stream as an unbounded table you can query continuously.',
+    sections: [
+      {
+        title: 'The Streaming Model',
+        callout: { type: 'blue', label: 'Key Concept', text: 'Think of a stream as a table that keeps growing. You write a query against it once. Spark continuously runs that query as new data arrives. No new APIs to learn!' }
+      },
+      {
+        title: 'Kafka → PySpark → Snowflake',
+        content: 'This is the exact pattern used in production at CitiBank:',
+        code: { lang: 'python', content: `from pyspark.sql import SparkSession
+from pyspark.sql.functions import from_json, col, to_timestamp
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType
+
+spark = SparkSession.builder \\
+    .appName("KafkaStreaming") \\
+    .config("spark.jars.packages",
+            "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0") \\
+    .getOrCreate()
+
+# 1. Read from Kafka
+raw_stream = spark.readStream \\
+    .format("kafka") \\
+    .option("kafka.bootstrap.servers", "kafka:9092") \\
+    .option("subscribe", "transactions") \\
+    .option("startingOffsets", "latest") \\
+    .load()
+
+# 2. Parse JSON payload
+schema = StructType([
+    StructField("transaction_id", StringType()),
+    StructField("customer_id",    StringType()),
+    StructField("amount",         DoubleType()),
+    StructField("ts",             StringType()),
+])
+
+parsed = raw_stream \\
+    .select(from_json(col("value").cast("string"), schema).alias("data")) \\
+    .select("data.*") \\
+    .withColumn("event_time", to_timestamp("ts"))
+
+# 3. Aggregate: running totals per customer in 5-min windows
+from pyspark.sql.functions import window, sum as _sum
+agg = parsed \\
+    .withWatermark("event_time", "10 minutes") \\
+    .groupBy(window("event_time", "5 minutes"), "customer_id") \\
+    .agg(_sum("amount").alias("total_amount"))
+
+# 4. Write to Snowflake (or S3)
+query = agg.writeStream \\
+    .format("snowflake") \\
+    .option("checkpointLocation", "s3://bucket/checkpoints/") \\
+    .option("dbtable", "TRANSACTION_SUMMARY") \\
+    .start()
+
+query.awaitTermination()` }
+      },
+      {
+        title: 'Output Modes',
+        callout: { type: '', label: 'append', text: 'Only new rows are written. Good for raw event logging where rows never change.' },
+        callout2: { type: 'green', label: 'complete', text: 'The entire result table is rewritten every trigger. Use only for small aggregation results.' }
+      }
+    ],
+    prev: 'window', prevLabel: 'Window Functions',
+    next: 'etl', nextLabel: 'ETL Pipeline Design'
+  }
+};
+
+// ─── RENDER LESSON ───
+function loadLesson(id, sidebarEl) {
+  document.querySelectorAll('.subtopic').forEach(s => s.classList.remove('active'));
+  if (sidebarEl) sidebarEl.classList.add('active');
+
+  const lesson = lessons[id];
+  if (!lesson) return;
+
+  let html = `
+    <div class="lesson-header">
+      <div class="lesson-breadcrumb">DataAly › <span>${lesson.breadcrumb}</span></div>
+      <div class="lesson-title">${lesson.title}</div>
+      <p class="lesson-desc">${lesson.desc}</p>
+    </div>`;
+
+  lesson.sections.forEach((sec, si) => {
+    html += `<div class="lesson-section"><h3>${sec.title}</h3>`;
+    if (sec.content) html += `<p>${sec.content}</p>`;
+    if (sec.list) {
+      html += '<ul>' + sec.list.map(i => `<li>${i}</li>`).join('') + '</ul>';
+    }
+    if (sec.callout) {
+      html += `<div class="callout ${sec.callout.type||''}"><div class="callout-label">${sec.callout.label}</div><p>${sec.callout.text}</p></div>`;
+    }
+    if (sec.callout2) {
+      html += `<div class="callout ${sec.callout2.type||''}"><div class="callout-label">${sec.callout2.label}</div><p>${sec.callout2.text}</p></div>`;
+    }
+    if (sec.code) {
+      html += `
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">${sec.code.lang}</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><code class="language-${sec.code.lang}">${escHtml(sec.code.content.trim())}</code></pre>
+        </div>`;
+    }
+    if (sec.playground) {
+      const pid = `pg-${si}`;
+      html += `
+        <div class="playground">
+          <div class="playground-header">
+            <div class="playground-title">Interactive Playground</div>
+            <div class="playground-tabs">
+              <button class="ptab active" onclick="switchTab(this,'python','${pid}')">Python</button>
+              <button class="ptab" onclick="switchTab(this,'sql','${pid}')">SQL</button>
+            </div>
+          </div>
+          <div class="playground-editor">
+            <textarea class="playground-textarea" id="${pid}-code" spellcheck="false">${sec.playground.default}</textarea>
+          </div>
+          <div class="playground-actions">
+            <button class="run-btn" onclick="runCode('${pid}')">▶ Run Code</button>
+            <button class="reset-btn" onclick="resetCode('${pid}','${escAttr(sec.playground.default)}')">Reset</button>
+          </div>
+          <div class="playground-output" id="${pid}-output">
+            <div class="output-label">Output</div>
+            <span style="color:var(--muted2)">Click "Run Code" to execute →</span>
+          </div>
+        </div>`;
+    }
+    html += '</div>';
+  });
+
+  // Lesson nav
+  html += '<div class="lesson-nav">';
+  if (lesson.prev) html += `<button class="lesson-nav-btn" onclick="loadLesson('${lesson.prev}')">← ${lesson.prevLabel}</button>`;
+  else html += '<span></span>';
+  if (lesson.next) html += `<button class="lesson-nav-btn next" onclick="loadLesson('${lesson.next}')">→ ${lesson.nextLabel}</button>`;
+  html += '</div>';
+
+  document.getElementById('lesson-content').innerHTML = html;
+  document.getElementById('lesson-content').scrollTop = 0;
+  document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+}
+
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function escAttr(s){ return s.replace(/'/g,"\\'").replace(/\n/g,'\\n') }
+
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('code').innerText;
+  navigator.clipboard.writeText(code);
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 1500);
+}
+
+function switchTab(btn, lang, pid) {
+  btn.closest('.playground-tabs').querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+const playgroundDefaults = {};
+function resetCode(pid, def) {
+  document.getElementById(pid+'-code').value = def.replace(/\\n/g,'\n');
+  document.getElementById(pid+'-output').innerHTML = '<div class="output-label">Output</div><span style="color:var(--muted2)">Click "Run Code" to execute →</span>';
+}
+
+function runCode(pid) {
+  const code = document.getElementById(pid+'-code').value;
+  const outEl = document.getElementById(pid+'-output');
+  outEl.innerHTML = '<div class="output-label">Output</div>';
+
+  const lines = [];
+  const fakePrint = (...args) => lines.push(args.map(String).join(' '));
+
+  try {
+    const fn = new Function('print', 'console', code.replace(/print\(/g, 'print('));
+    fn(fakePrint, { log: fakePrint, error: fakePrint });
+    outEl.innerHTML += lines.length ? lines.join('\n') : '<span style="color:var(--muted)">✓ Code ran with no output.</span>';
+  } catch(e) {
+    outEl.innerHTML += `<span style="color:#f87171">Error: ${e.message}</span>`;
+  }
+}
+
+// ─── QUESTIONS DATA ───
+const questions = [
+  {
+    id:1, diff:'easy', topic:'pyspark', text:'What is the difference between a Transformation and an Action in PySpark?',
+    answer:`<p><strong>Transformations</strong> are lazy operations that return a new DataFrame or RDD without executing immediately. Examples: <code>filter()</code>, <code>select()</code>, <code>map()</code>, <code>groupBy()</code>.</p><p><strong>Actions</strong> trigger the actual execution of the computation graph. Examples: <code>show()</code>, <code>count()</code>, <code>collect()</code>, <code>write()</code>.</p><p>Spark builds a DAG of transformations and optimizes them together before running the first action. This is called <strong>lazy evaluation</strong>.</p>`,
+    starterCode: `# Identify which are transformations (T) and actions (A):
+ops = {
+    "filter()":   "?",  # T or A?
+    "count()":    "?",
+    "select()":   "?",
+    "collect()":  "?",
+    "groupBy()":  "?",
+    "show()":     "?",
+    "map()":      "?",
+    "write()":    "?",
+}
+for op, kind in ops.items():
+    print(f"{op:15} → {kind}")`
+  },
+  {
+    id:2, diff:'easy', topic:'pyspark', text:'What is a SparkSession and how do you create one?',
+    answer:`<p>SparkSession is the unified entry point to Spark functionality introduced in Spark 2.0. It combines SparkContext, SQLContext, and HiveContext into a single object.</p><p>Create with builder pattern: <code>SparkSession.builder.appName("name").getOrCreate()</code>. The <code>getOrCreate()</code> returns an existing session or creates a new one — important in notebooks where you don't want duplicate sessions.</p>`,
+    starterCode: `# Write code to create a SparkSession with:
+# - App name: "DataAly Tutorial"
+# - Shuffle partitions: 100
+# - Enable Hive support
+
+# Your code here:
+print("SparkSession config:")
+config = {
+    "appName": "DataAly Tutorial",
+    "spark.sql.shuffle.partitions": 100,
+    "hive_support": True
+}
+for k,v in config.items():
+    print(f"  {k}: {v}")`
+  },
+  {
+    id:3, diff:'medium', topic:'pyspark', text:'Explain the difference between repartition() and coalesce(). When would you use each?',
+    answer:`<p><strong>repartition(n)</strong>: Full shuffle — redistributes data evenly across n partitions. Use when <em>increasing</em> partition count or when you need even distribution. Can also partition by a column: <code>repartition(n, "col")</code>.</p><p><strong>coalesce(n)</strong>: No full shuffle — combines existing partitions. Only works for <em>reducing</em> partitions. Much cheaper. Use before writing a small output file.</p><p>Rule of thumb: use <code>coalesce</code> when reducing, <code>repartition</code> when increasing or rebalancing skewed data.</p>`,
+    starterCode: `# Decide: repartition or coalesce?
+scenarios = [
+    "Reading 1000 partitions, writing 1 output file",
+    "Data is skewed, some partitions 10x larger than others",
+    "Going from 10 to 200 partitions for a large join",
+    "Reducing 500 partitions to 50 after filtering 90% of data",
+    "Partitioning by customer_id for co-located joins",
+]
+for s in scenarios:
+    # Print your answer: repartition or coalesce
+    print(f"Scenario: {s}")
+    print(f"  Answer: ?")
+    print()`
+  },
+  {
+    id:4, diff:'medium', topic:'pyspark', text:'What is a broadcast join in Spark and when should you use it?',
+    answer:`<p>A <strong>broadcast join</strong> sends a copy of the smaller DataFrame to every executor, so the join happens locally without a shuffle. This is dramatically faster when one table is small (typically < 10MB by default).</p><p>Use <code>broadcast(small_df)</code> or configure <code>spark.sql.autoBroadcastJoinThreshold</code> (in bytes). Avoid broadcasting large tables as it can cause out-of-memory errors on executors.</p>`,
+    starterCode: `# Which scenario is best for broadcast join?
+# Analyze these join scenarios:
+
+scenarios = [
+    {"left": "500M rows (customer transactions)", "right": "50 rows (country codes)"},
+    {"left": "10M rows (orders)",                 "right": "8M rows (products)"},
+    {"left": "1B rows (events)",                  "right": "1000 rows (config table)"},
+    {"left": "100K rows (users)",                 "right": "100K rows (sessions)"},
+]
+
+for i, s in enumerate(scenarios, 1):
+    should_broadcast = "right" if "rows (country" in s["right"] or "rows (config" in s["right"] else "neither"
+    print(f"Scenario {i}: Broadcast={should_broadcast}")
+    print(f"  Left:  {s['left']}")
+    print(f"  Right: {s['right']}")
+    print()`
+  },
+  {
+    id:5, diff:'medium', topic:'sql', text:'Write a SQL query to find the top 3 highest-paid employees in each department.',
+    answer:`<p>Use a window function with <code>DENSE_RANK()</code> partitioned by department:</p><pre>SELECT * FROM (
+  SELECT *, DENSE_RANK() OVER (
+    PARTITION BY department ORDER BY salary DESC
+  ) AS rnk
+  FROM employees
+) WHERE rnk <= 3;</pre><p>Use <code>DENSE_RANK</code> over <code>ROW_NUMBER</code> to handle salary ties correctly. <code>ROW_NUMBER</code> would arbitrarily assign different ranks to employees with the same salary.</p>`,
+    starterCode: `-- Write SQL to find top 3 earners per department
+-- Table: employees(id, name, department, salary)
+
+-- Hint: use a window function
+SELECT *
+FROM (
+    SELECT
+        name,
+        department,
+        salary,
+        -- Your window function here:
+        ??? OVER (PARTITION BY ??? ORDER BY ???) AS rank
+    FROM employees
+) ranked
+WHERE rank <= 3
+ORDER BY department, rank;`
+  },
+  {
+    id:6, diff:'hard', topic:'pyspark', text:'Explain data skew in Spark. How do you detect it, and what are 3 strategies to fix it?',
+    answer:`<p><strong>Data skew</strong> occurs when data is unevenly distributed across partitions. One partition has millions of rows while others have thousands — that one partition becomes the bottleneck and slows the entire job.</p><p><strong>Detection:</strong> Check Spark UI → Stages → look for one task taking much longer. Or: <code>df.groupBy(spark_partition_id()).count().show()</code>.</p><p><strong>Fix 1: Salting</strong> — Add a random prefix (0-N) to the join key on the large side, and explode the small side with all prefixes. Distributes the heavy key across N partitions.</p><p><strong>Fix 2: Broadcast join</strong> — If the small side is actually small enough, broadcast it and avoid the shuffle entirely.</p><p><strong>Fix 3: AQE (Adaptive Query Execution)</strong> — Enable <code>spark.sql.adaptive.enabled=true</code> (Spark 3.0+). Spark automatically coalesces skewed partitions at runtime.</p>`,
+    starterCode: `# Simulate data skew detection:
+import random
+
+# Simulate skewed partition sizes
+partition_sizes = [random.randint(100, 500) for _ in range(19)]
+partition_sizes.append(50000)  # One skewed partition!
+
+print("Partition sizes:")
+for i, size in enumerate(partition_sizes):
+    bar = "█" * (size // 500)
+    skew = " ← SKEWED!" if size > 10000 else ""
+    print(f"  P{i:02d}: {size:6,} rows {bar}{skew}")
+
+max_size = max(partition_sizes)
+avg_size = sum(partition_sizes) / len(partition_sizes)
+print(f"\\nMax: {max_size:,} | Avg: {avg_size:.0f} | Skew ratio: {max_size/avg_size:.1f}x")`
+  },
+  {
+    id:7, diff:'hard', topic:'streaming', text:'What is exactly-once semantics in Spark Structured Streaming? How does checkpointing help?',
+    answer:`<p><strong>Exactly-once semantics</strong> means each record is processed and written exactly one time — no duplicates, no missed records — even if executors fail mid-job.</p><p>Spark achieves this through:</p><p><strong>Checkpointing:</strong> Spark writes the current state (offsets processed, aggregation state) to a durable location (e.g., S3) at the end of each micro-batch. On restart, it reads this checkpoint and resumes from exactly where it left off.</p><p><strong>Idempotent sinks:</strong> The output sink must also support idempotent writes. For file sinks (Parquet), Spark uses atomic file operations. For Kafka, it uses transactional producers. For custom sinks, you must implement idempotency yourself.</p><p>Without checkpointing, a failure would restart from the beginning (or latest offset), causing duplicate or lost data.</p>`,
+    starterCode: `# Explain checkpointing flow:
+checkpoint_flow = [
+    "1. Spark reads new offsets from Kafka",
+    "2. Processes micro-batch",
+    "3. Writes output to sink",
+    "4. ???",  # What happens here with checkpointing?
+    "5. On failure: ???",  # What does Spark do?
+]
+
+for step in checkpoint_flow:
+    print(step)
+
+print("\\nKey checkpoint configs:")
+configs = {
+    "checkpointLocation": "s3://bucket/checkpoints/job1/",
+    "trigger": "processingTime='30 seconds'",
+}
+for k,v in configs.items():
+    print(f"  {k}: {v}")`
+  },
+  {
+    id:8, diff:'easy', topic:'sql', text:'What is the difference between WHERE and HAVING in SQL?',
+    answer:`<p><strong>WHERE</strong> filters rows <em>before</em> grouping. It cannot reference aggregate functions.</p><p><strong>HAVING</strong> filters <em>after</em> grouping. It can reference aggregate functions like COUNT, AVG, SUM.</p><p>Example: <code>WHERE salary > 50000</code> filters individual rows. <code>HAVING COUNT(*) > 5</code> filters groups that have more than 5 members.</p>`,
+    starterCode: `-- Fix the errors in this query:
+-- Find departments with avg salary > 80000
+-- Only consider employees hired after 2020
+
+SELECT department, AVG(salary) as avg_sal
+FROM employees
+HAVING hire_year > 2020        -- BUG: should this be WHERE or HAVING?
+GROUP BY department
+WHERE AVG(salary) > 80000;     -- BUG: should this be WHERE or HAVING?`
+  },
+];
+
+// ─── RENDER QUESTIONS ───
+let attempted = new Set();
+
+function renderQuestions(filter = 'all') {
+  const filtered = filter === 'all'
+    ? questions
+    : questions.filter(q => q.diff === filter || q.topic === filter);
+
+  document.getElementById('progress-total').textContent = questions.length;
+  document.getElementById('progress-count').textContent = attempted.size;
+  document.getElementById('progress-fill').style.width = `${(attempted.size/questions.length)*100}%`;
+
+  const container = document.getElementById('questions-container');
+  container.innerHTML = filtered.map(q => `
+    <div class="q-card" data-diff="${q.diff}" data-topic="${q.topic}">
+      <div class="q-header" onclick="toggleQuestion(${q.id})">
+        <div>
+          <div class="q-meta">
+            <span class="q-num">#${q.id}</span>
+            <span class="q-diff diff-${q.diff}">${q.diff}</span>
+            <span class="q-topic-tag">${q.topic}</span>
+          </div>
+          <div class="q-text">${q.text}</div>
+        </div>
+        <button class="q-toggle" id="qtoggle-${q.id}">Show ▼</button>
+      </div>
+      <div class="q-body" id="qbody-${q.id}">
+        <div class="q-try">
+          <div class="q-try-label">✍ Try it yourself</div>
+          <textarea class="q-textarea" id="qcode-${q.id}" spellcheck="false">${q.starterCode}</textarea>
+          <div class="q-actions">
+            <button class="q-run" onclick="runQCode(${q.id})">▶ Run</button>
+            <button class="q-reveal" onclick="revealAnswer(${q.id})">💡 Show Answer</button>
+          </div>
+          <div class="q-output-box" id="qout-${q.id}"></div>
+        </div>
+        <div class="q-answer" id="qans-${q.id}">
+          <div class="q-answer-label">Answer</div>
+          ${q.answer}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleQuestion(id) {
+  const body = document.getElementById('qbody-'+id);
+  const btn = document.getElementById('qtoggle-'+id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  btn.textContent = isOpen ? 'Show ▼' : 'Hide ▲';
+  if (!isOpen) {
+    attempted.add(id);
+    document.getElementById('progress-count').textContent = attempted.size;
+    document.getElementById('progress-fill').style.width = `${(attempted.size/questions.length)*100}%`;
+  }
+}
+
+function revealAnswer(id) {
+  document.getElementById('qans-'+id).classList.toggle('show');
+}
+
+function runQCode(id) {
+  const code = document.getElementById('qcode-'+id).value;
+  const outEl = document.getElementById('qout-'+id);
+  const lines = [];
+  const fakePrint = (...args) => lines.push(args.map(String).join(' '));
+  outEl.classList.add('show');
+  try {
+    const fn = new Function('print', code);
+    fn(fakePrint);
+    outEl.textContent = lines.length ? lines.join('\n') : '✓ Code ran with no output.';
+    outEl.style.color = '#4ade80';
+  } catch(e) {
+    outEl.textContent = 'Error: ' + e.message;
+    outEl.style.color = '#f87171';
+  }
+}
+
+function filterQ(f, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderQuestions(f);
+}
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  loadLesson('pyspark-intro');
+  renderQuestions();
+});
+</script>
 </body>
 </html>
