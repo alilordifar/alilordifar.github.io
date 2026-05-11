@@ -3,159 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Lordifar — Senior Big Data Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Ali Lordifar — Senior Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#080c10;--bg2:#0d1117;--bg3:#161b22;--surface:#1c2230;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#10b981;
-  --text:#e6edf3;--muted:#8b949e;
-  --mono:'Space Mono',monospace;--sans:'Sora',sans-serif;
+  --bg:#0b0f14;
+  --bg2:#111720;
+  --bg3:#161d28;
+  --card:#131a24;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --ink:#d8e4f0;
+  --ink2:#7a92aa;
+  --ink3:#3a5066;
+  --accent:#38bdf8;
+  --accent2:#6366f1;
+  --accent-light:rgba(56,189,248,0.08);
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;overflow-x:hidden}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:2px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3rem;background:rgba(8,12,16,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:var(--mono);font-size:.95rem;color:var(--accent);letter-spacing:.02em}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 3rem;height:56px;background:rgba(11,15,20,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:.85rem;color:var(--ink);font-weight:600;letter-spacing:-.01em}
+.nav-logo .dot{color:var(--accent)}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-links a{font-family:var(--mono);font-size:.63rem;color:var(--ink3);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .18s}
 .nav-links a:hover{color:var(--accent)}
 
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,255,0.07) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,transparent 70%);pointer-events:none}
-.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);pointer-events:none;opacity:.35}
-.hero-tag{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
-.hero-tag::before{content:'';display:inline-block;width:2rem;height:1px;background:var(--accent)}
-.hero h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:.3rem}
-.name-dim{color:var(--muted);font-weight:300}
-.hero-title{font-family:var(--mono);font-size:clamp(.9rem,2vw,1.2rem);color:var(--accent);margin-bottom:2rem;opacity:.9}
-.hero-bio{max-width:580px;color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:2.5rem}
-.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:all .2s;cursor:pointer;border:none}
-.btn-primary{background:var(--accent);color:#000;font-weight:700}
-.btn-primary:hover{background:#33ecff;transform:translateY(-2px)}
-.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text)}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.cursor{animation:blink 1s infinite;color:var(--accent)}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hero-tag{animation:fadeInUp .5s ease both}
-.hero h1{animation:fadeInUp .5s .1s ease both}
-.hero-title{animation:fadeInUp .5s .2s ease both}
-.hero-bio{animation:fadeInUp .5s .3s ease both}
-.hero-cta{animation:fadeInUp .5s .4s ease both}
+/* HERO — two column, full viewport */
+.hero{height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:56px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:4rem 3.5rem 4rem 4rem;background:#080c11;position:relative;overflow:hidden}
+.hero-left::after{content:'';position:absolute;bottom:0;right:0;width:60%;height:60%;background:radial-gradient(ellipse at bottom right,rgba(56,189,248,0.08),transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:var(--mono);font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;display:flex;align-items:center;gap:.65rem}
+.hero-eyebrow::before{content:'';width:1.5rem;height:1px;background:var(--accent)}
+.hero-name{font-size:clamp(3.5rem,6vw,5.5rem);font-weight:800;line-height:.95;letter-spacing:-.04em;color:#e8f4fd;margin-bottom:1.5rem}
+.hero-name .last{color:var(--accent);display:block}
+.hero-role{font-family:var(--mono);font-size:.78rem;color:var(--ink2);margin-bottom:2rem;line-height:1.7;border-left:2px solid var(--accent);padding-left:.85rem}
+.hero-bio{font-size:.95rem;color:var(--ink2);line-height:1.9;max-width:440px;margin-bottom:2.5rem}
+.hero-bio strong{color:var(--ink);font-weight:500}
+.hero-btns{display:flex;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.4rem;font-family:var(--mono);font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:4px;font-weight:600;transition:all .2s;border:none;cursor:pointer}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#7dd3fc;transform:translateY(-1px);box-shadow:0 6px 20px rgba(56,189,248,0.25)}
+.btn-o{background:transparent;border:1px solid var(--border2);color:var(--ink2)}.btn-o:hover{border-color:var(--accent);color:var(--accent)}
 
-section{padding:5.5rem 4rem;max-width:1100px;margin:0 auto}
-.section-label{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.75rem}
-.section-label::after{content:'';flex:1;max-width:80px;height:1px;background:var(--accent);opacity:.4}
-.section-title{font-size:1.9rem;font-weight:600;letter-spacing:-.02em;margin-bottom:2.5rem;color:var(--text)}
+.hero-right{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem;background:var(--bg);gap:1.5rem;position:relative}
+.hero-photo-wrap{position:relative}
+.hero-photo{width:260px;height:320px;object-fit:cover;object-position:center top;border-radius:6px;border:1px solid var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.12);display:block}
+.hero-photo-ph{width:260px;height:320px;border-radius:6px;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--ink3)}
+.hero-chips{display:flex;flex-direction:column;gap:.5rem;width:100%;max-width:280px}
+.hchip{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:.65rem .9rem;display:flex;align-items:center;gap:.7rem}
+.hchip-icon{font-size:1rem;flex-shrink:0}
+.hchip-text{font-family:var(--mono);font-size:.67rem;color:var(--ink2);line-height:1.4}
+.hchip-text strong{color:var(--ink);font-weight:600;display:block;font-size:.72rem}
 
+/* SECTIONS */
+section{padding:5rem 4rem;max-width:1100px;margin:0 auto}
+.s-label{font-family:var(--mono);font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.s-h{font-size:2rem;font-weight:700;letter-spacing:-.03em;margin-bottom:2.5rem;color:var(--ink)}
+.divider{border:none;border-top:1px solid var(--border);margin:0 4rem}
+
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.about-text p{color:var(--muted);margin-bottom:1.2rem;font-size:.98rem}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.4rem;position:relative;overflow:hidden}
-.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:.7}
-.stat-num{font-family:var(--mono);font-size:1.9rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.35rem}
-.stat-label{font-size:.78rem;color:var(--muted);letter-spacing:.03em}
+.about-p{color:var(--ink2);font-size:.95rem;line-height:1.9;margin-bottom:.9rem}
+.about-p strong{color:var(--ink);font-weight:600}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.5rem}
+.astat{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.1rem;border-left:3px solid var(--accent)}
+.astat-n{font-family:var(--mono);font-size:1.75rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:.2rem}
+.astat-l{font-size:.73rem;color:var(--ink3)}
 
-.skill-category{margin-bottom:2.2rem}
-.skill-cat-name{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.9rem}
-.skill-tags{display:flex;flex-wrap:wrap;gap:.55rem}
-.skill-tag{padding:.38rem .95rem;background:var(--bg3);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:.75rem;color:var(--text);transition:all .2s;cursor:default}
-.skill-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.04)}
-.skill-tag.accent{border-color:rgba(0,229,255,0.3);color:var(--accent)}
-.skill-tag.purple{border-color:rgba(124,58,237,0.4);color:#a78bfa}
-.skill-tag.green{border-color:rgba(16,185,129,0.4);color:#34d399}
-.skill-tag.amber{border-color:rgba(234,179,8,0.35);color:#fbbf24}
+/* SKILLS */
+.sg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.sg{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.25rem}
+.sg-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.tags{display:flex;flex-wrap:wrap;gap:.38rem}
+.tag{padding:.25rem .7rem;border-radius:3px;font-family:var(--mono);font-size:.65rem;font-weight:500}
+.ta{background:rgba(56,189,248,0.08);color:#38bdf8;border:1px solid rgba(56,189,248,0.22)}
+.tb{background:rgba(99,102,241,0.08);color:#818cf8;border:1px solid rgba(99,102,241,0.22)}
+.tg{background:rgba(52,211,153,0.08);color:#34d399;border:1px solid rgba(52,211,153,0.22)}
+.ty{background:rgba(251,191,36,0.08);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
+.tr{background:rgba(248,113,113,0.08);color:#f87171;border:1px solid rgba(248,113,113,0.2)}
+.td{background:var(--bg3);color:var(--ink2);border:1px solid var(--border2)}
 
-.timeline{position:relative;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:0;top:8px;width:1px;height:calc(100% - 8px);background:linear-gradient(to bottom,var(--accent),transparent);opacity:.3}
-.exp-item{position:relative;margin-bottom:2.8rem;padding-bottom:2.8rem;border-bottom:1px solid var(--border)}
-.exp-item:last-child{border-bottom:none;margin-bottom:0}
-.exp-item::before{content:'';position:absolute;left:-2rem;top:8px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;flex-wrap:wrap;gap:.5rem}
-.exp-role{font-size:1.05rem;font-weight:600;color:var(--text)}
-.exp-date{font-family:var(--mono);font-size:.72rem;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:.28rem .7rem;border-radius:3px;white-space:nowrap}
-.exp-company{font-family:var(--mono);font-size:.82rem;color:var(--accent);margin-bottom:.9rem;opacity:.85}
-.exp-bullets{list-style:none;margin-bottom:1rem}
-.exp-bullets li{color:var(--muted);font-size:.9rem;line-height:1.75;padding-left:1.2rem;position:relative;margin-bottom:.3rem}
-.exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:700}
-.exp-tech{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
-.tech-pill{font-family:var(--mono);font-size:.68rem;padding:.2rem .6rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:3px;color:#a78bfa;letter-spacing:.03em}
+/* EXPERIENCE */
+.tl{position:relative;padding-left:1.5rem}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.exp{position:relative;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.exp:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.exp::before{content:'';position:absolute;left:-1.5rem;top:9px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(56,189,248,0.3)}
+.exp-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.2rem}
+.exp-role{font-size:.97rem;font-weight:700;color:var(--ink)}
+.exp-date{font-family:var(--mono);font-size:.61rem;color:var(--ink3);background:var(--bg2);border:1px solid var(--border);padding:.2rem .6rem;border-radius:3px;white-space:nowrap}
+.exp-co{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-bottom:.75rem;font-weight:600}
+.exp ul{list-style:none}
+.exp ul li{color:var(--ink2);font-size:.87rem;padding-left:.95rem;position:relative;margin-bottom:.3rem;line-height:1.75}
+.exp ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.65rem;top:.28rem;font-family:var(--mono)}
 
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem}
-.project-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.6rem;position:relative;overflow:hidden;transition:all .3s}
-.project-card:hover{border-color:var(--accent);transform:translateY(-4px);background:var(--surface)}
-.project-card::before{content:attr(data-num);position:absolute;top:.8rem;right:1.2rem;font-family:var(--mono);font-size:2.8rem;font-weight:700;color:var(--border2);line-height:1;pointer-events:none}
-.project-name{font-size:1rem;font-weight:600;margin-bottom:.65rem;color:var(--text)}
-.project-tech{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
-.project-tech-tag{font-family:var(--mono);font-size:.65rem;padding:.18rem .55rem;background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.2);border-radius:3px;color:var(--accent)}
-.project-desc{font-size:.87rem;color:var(--muted);line-height:1.7}
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.proj{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;transition:all .22s}
+.proj:hover{border-color:rgba(56,189,248,0.3);box-shadow:0 4px 24px rgba(56,189,248,0.07);transform:translateY(-2px)}
+.proj-ico{font-size:1.5rem;margin-bottom:.75rem}
+.proj-name{font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:.45rem}
+.proj-desc{font-size:.82rem;color:var(--ink2);line-height:1.75}
+.ptags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
+.pt{font-family:var(--mono);font-size:.6rem;padding:.18rem .55rem;border-radius:3px;background:var(--bg2);border:1px solid var(--border);color:var(--ink3)}
 
-.edu-list{display:flex;flex-direction:column;gap:1.2rem}
-.edu-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:border-color .2s;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.edu-card:hover{border-color:var(--accent3)}
-.edu-degree{font-size:1rem;font-weight:600;margin-bottom:.3rem;color:var(--text)}
-.edu-school{font-family:var(--mono);font-size:.78rem;color:var(--accent3);margin-bottom:.25rem}
-.edu-note{font-size:.82rem;color:var(--muted);max-width:500px}
-.edu-year{font-family:var(--mono);font-size:.72rem;color:var(--muted);white-space:nowrap;padding:.3rem .7rem;background:var(--bg2);border:1px solid var(--border);border-radius:3px;align-self:flex-start}
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.edu{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.4rem;border-top:3px solid var(--accent)}
+.edu-deg{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.edu-school{font-family:var(--mono);font-size:.68rem;color:var(--accent);margin-bottom:.18rem;font-weight:600}
+.edu-yr{font-family:var(--mono);font-size:.6rem;color:var(--ink3);margin-bottom:.6rem}
+.edu-note{font-size:.79rem;color:var(--ink2);line-height:1.7;border-top:1px solid var(--border);padding-top:.6rem}
 
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-.cert-card{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:1.2rem 1.4rem;transition:border-color .2s}
-.cert-card:hover{border-color:rgba(251,191,36,0.5)}
-.cert-name{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.3rem}
-.cert-issuer{font-family:var(--mono);font-size:.7rem;color:#fbbf24;opacity:.85}
+.certs{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:2rem}
+.cert{display:flex;align-items:center;gap:.65rem;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;transition:border-color .2s}
+.cert:hover{border-color:var(--accent)}
+.cert-ico{font-size:1.2rem}
+.cert-name{font-size:.82rem;font-weight:600;color:var(--ink)}
+.cert-by{font-family:var(--mono);font-size:.59rem;color:var(--ink3);margin-top:.08rem}
 
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.contact-text{font-size:.98rem;color:var(--muted);line-height:1.85;margin-bottom:2rem}
-.contact-links{display:flex;flex-direction:column;gap:.9rem}
-.contact-link{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text);transition:all .2s}
-.contact-link:hover{border-color:var(--accent);color:var(--accent)}
-.contact-link-icon{width:34px;height:34px;border-radius:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;font-family:var(--mono)}
-.contact-link-info{flex:1}
-.contact-link-label{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
-.contact-link-val{font-size:.88rem;font-weight:500}
-.contact-form{display:flex;flex-direction:column;gap:.9rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
-.form-group{display:flex;flex-direction:column;gap:.38rem}
-.form-label{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
-.form-input,.form-textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:.7rem .95rem;color:var(--text);font-family:var(--sans);font-size:.88rem;transition:border-color .2s;outline:none;resize:none}
-.form-input:focus,.form-textarea:focus{border-color:var(--accent)}
-.form-textarea{min-height:110px}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.chip{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem;text-decoration:none;transition:all .2s}
+.chip:hover{border-color:rgba(56,189,248,0.4);background:var(--bg3)}
+.chip-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.3rem}
+.chip-val{font-size:.83rem;color:var(--ink);font-weight:500}
 
-footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center}
-.footer-copy{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
-.footer-made{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.footer-made span{color:var(--accent)}
+footer{background:var(--bg2);padding:2rem 4rem;text-align:center;font-family:var(--mono);font-size:.63rem;color:var(--ink3)}
+footer em{color:var(--accent);font-style:normal}
 
-.hero-inner{display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap}
-.hero-content{flex:1;min-width:280px}
-.hero-photo-wrap{flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.hero-photo{width:260px;height:260px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--accent);box-shadow:0 0 40px rgba(0,229,255,0.15),0 0 0 6px rgba(0,229,255,0.06);display:block}
+@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
+.cur{animation:cur 1.1s infinite;color:var(--accent)}
 
-@media(max-width:768px){
-  nav{padding:1rem 1.5rem}
+@media(max-width:900px){
+  nav{padding:0 1.25rem}
   .nav-links{display:none}
-  .hero,section{padding-left:1.5rem;padding-right:1.5rem}
-  .hero-inner{flex-direction:column-reverse;gap:2rem}
-  .hero-photo{width:160px;height:160px}
-  .about-grid,.contact-inner{grid-template-columns:1fr;gap:2rem}
-  .form-row{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:.5rem;text-align:center}
-  .edu-card{flex-direction:column}
+  .hero{grid-template-columns:1fr;height:auto}
+  .hero-left{padding:5rem 1.5rem 3rem}
+  .hero-right{padding:2rem 1.5rem 3rem}
+  .hero-photo,.hero-photo-ph{width:200px;height:250px}
+  section{padding:3.5rem 1.5rem}
+  .divider{margin:0 1.5rem}
+  .about-grid,.sg-grid,.proj-grid,.edu-grid,.contact-grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">AL<span class="cursor">_</span></div>
+  <div class="nav-logo">Ali<span class="dot">.</span>Lordifar<span class="cur">_</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -166,306 +170,257 @@ footer{border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;just
   </ul>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-tag">Open to opportunities · Toronto, ON</div>
-      <h1><span class="name-dim">Hi, I'm</span><br>Ali Lordifar.</h1>
-      <div class="hero-title">// Senior Big Data Engineer &amp; ML Specialist</div>
-      <p class="hero-bio">I architect large-scale cloud data pipelines, real-time streaming systems, and machine learning solutions. Passionate about distributed computing, serverless architecture, and turning raw data into business intelligence.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        <a href="#projects" class="btn btn-outline">View Projects</a>
-      </div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Open to senior &amp; staff roles</div>
+    <div class="hero-name">Ali<span class="last">Lordifar</span></div>
+    <div class="hero-role">
+      Senior Data Engineer · AVP @ Citibank<br>
+      UC Berkeley MIDS · Toronto, ON
     </div>
+    <p class="hero-bio">I architect <strong>large-scale distributed data platforms</strong>, real-time streaming systems, and ML infrastructure — processing millions of enterprise events daily across Kafka, Spark, and Snowflake.</p>
+    <div class="hero-btns">
+      <a href="#experience" class="btn btn-p">View Experience →</a>
+      <a href="#contact" class="btn btn-o">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
     <div class="hero-photo-wrap">
-      <img class="hero-photo" src="https://i.postimg.cc/MH7CVgjm/IMG-0728.avif" alt="Ali Lordifar">
+      <img class="hero-photo" src="https://i.postimg.cc/MH7CVgjm/IMG-0728.avif" alt="Ali Lordifar"
+           onerror="this.outerHTML='<div class=hero-photo-ph>👤</div>'">
+    </div>
+    <div class="hero-chips">
+      <div class="hchip">
+        <div class="hchip-icon">🏢</div>
+        <div class="hchip-text"><strong>Citibank</strong>AVP · Senior Data Engineer</div>
+      </div>
+      <div class="hchip">
+        <div class="hchip-icon">🎓</div>
+        <div class="hchip-text"><strong>UC Berkeley</strong>MIDS · 2026–2028</div>
+      </div>
+      <div class="hchip">
+        <div class="hchip-icon">☁️</div>
+        <div class="hchip-text"><strong>3× AWS Certified</strong>ML · Data Analytics · Practitioner</div>
+      </div>
     </div>
   </div>
 </div>
 
+<hr class="divider">
+
+<!-- ABOUT -->
 <section id="about">
-  <div class="section-label">01. About</div>
-  <h2 class="section-title">Who I Am</h2>
+  <div class="s-label">01 — Profile</div>
+  <h2 class="s-h">About Me</h2>
   <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a Senior Big Data Engineer and Data Scientist with 8+ years of experience spanning cloud data engineering, machine learning research, and real-time streaming systems.</p>
-      <p>Currently working as AVP-level Senior Data Engineer at CitiBank, I design and operate AWS-native data lakes, Spark-on-EKS pipelines, and Confluent Kafka streaming infrastructure at enterprise scale.</p>
-      <p>I hold two Master's degrees — one in Computer Engineering (University of Guelph) and one in Information and Data Science (UC Berkeley, in progress) — plus multiple AWS certifications in cloud, analytics, and machine learning.</p>
-    </div>
-    <div class="about-stats">
-      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Years of experience</div></div>
-      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">AWS certifications</div></div>
-      <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Master's degrees</div></div>
-      <div class="stat-card"><div class="stat-num">96%</div><div class="stat-label">Model accuracy achieved</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="section-label">02. Skills</div>
-  <h2 class="section-title">Tech Stack</h2>
-  <div class="skill-category">
-    <div class="skill-cat-name">Languages &amp; Frameworks</div>
-    <div class="skill-tags">
-      <span class="skill-tag accent">Python</span>
-      <span class="skill-tag accent">PySpark</span>
-      <span class="skill-tag accent">SQL</span>
-      <span class="skill-tag">FastAPI</span>
-      <span class="skill-tag">Flask</span>
-      <span class="skill-tag">Shell Scripting</span>
-      <span class="skill-tag">TensorFlow / Keras</span>
-      <span class="skill-tag">NumPy / Pandas</span>
-      <span class="skill-tag">Sklearn</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">Big Data &amp; Streaming</div>
-    <div class="skill-tags">
-      <span class="skill-tag purple">Apache Spark</span>
-      <span class="skill-tag purple">Confluent Kafka</span>
-      <span class="skill-tag purple">Apache Hadoop</span>
-      <span class="skill-tag purple">Amazon Kinesis</span>
-      <span class="skill-tag purple">Amazon EKS</span>
-      <span class="skill-tag purple">MWAA</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">Cloud &amp; Infrastructure</div>
-    <div class="skill-tags">
-      <span class="skill-tag green">AWS S3</span>
-      <span class="skill-tag green">AWS Glue</span>
-      <span class="skill-tag green">AWS Lambda</span>
-      <span class="skill-tag green">AWS SageMaker</span>
-      <span class="skill-tag green">AWS EC2</span>
-      <span class="skill-tag green">Snowflake</span>
-      <span class="skill-tag">Kubernetes</span>
-      <span class="skill-tag">Docker</span>
-      <span class="skill-tag">Jenkins</span>
-      <span class="skill-tag">OpenShift</span>
-    </div>
-  </div>
-  <div class="skill-category">
-    <div class="skill-cat-name">ML &amp; Deep Learning</div>
-    <div class="skill-tags">
-      <span class="skill-tag amber">CNN / RNN</span>
-      <span class="skill-tag amber">XGBoost</span>
-      <span class="skill-tag amber">YOLO / SSD</span>
-      <span class="skill-tag amber">SVM</span>
-      <span class="skill-tag amber">Random Forests</span>
-      <span class="skill-tag amber">KNN / K-Means</span>
-      <span class="skill-tag">PostgreSQL</span>
-      <span class="skill-tag">Git / GitHub</span>
-      <span class="skill-tag">Bitbucket</span>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="section-label">03. Experience</div>
-  <h2 class="section-title">Work History</h2>
-  <div class="timeline">
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Senior Data Engineer (Assistant Vice President)</div>
-        <div class="exp-date">Nov 2022 — Present</div>
-      </div>
-      <div class="exp-company">CitiBank · Toronto, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Designed and deployed an AWS S3 Data Lake leveraging Spark on EKS for scalable processing and MWAA for orchestration.</li>
-        <li>Built real-time and near-real-time streaming pipelines using PySpark and Confluent Kafka, ingesting into Snowflake via S3.</li>
-        <li>Engineered a generic ETL framework in PySpark for transforming and loading data across diverse sources into AWS S3.</li>
-        <li>Developed a data streaming API to fully automate cloud onboarding processes.</li>
-        <li>Collaborated on OpenShift, Kubernetes, CI/CD, Snowflake, and AWS Glue integrations for system scalability.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">PySpark</span><span class="tech-pill">Confluent Kafka</span><span class="tech-pill">AWS S3</span><span class="tech-pill">Snowflake</span><span class="tech-pill">EKS</span><span class="tech-pill">MWAA</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">AWS Glue</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Data Scientist</div>
-        <div class="exp-date">Jun 2022 — Oct 2022</div>
-      </div>
-      <div class="exp-company">Eon Media · Toronto, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Developed deep learning and ML models; deployed parallel models on AWS behind a single endpoint.</li>
-        <li>Used AWS S3, SageMaker, and Lambda for cloud-based model training and serverless inference.</li>
-        <li>Built and managed serverless APIs for ML model inference at scale.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">SageMaker</span><span class="tech-pill">AWS Lambda</span><span class="tech-pill">S3</span><span class="tech-pill">Deep Learning</span><span class="tech-pill">Serverless</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Machine Learning Researcher</div>
-        <div class="exp-date">May 2020 — Sep 2021</div>
-      </div>
-      <div class="exp-company">EagleVision Systems · Kitchener, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Integrated AI strategies for "Automatic Curbside Waste Collection" (NSERC-sponsored), achieving 96% detection accuracy with YOLO/SSD.</li>
-        <li>Built CNN models for image classification; deployed joint depth estimation and object detection on Jetson TX2.</li>
-        <li>Integrated YOLOv3/v4 and SSD models on Microsoft Azure Kinect DK sensor.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">YOLOv3/v4</span><span class="tech-pill">SSD</span><span class="tech-pill">CNN</span><span class="tech-pill">TensorFlow</span><span class="tech-pill">Azure Kinect</span><span class="tech-pill">Jetson TX2</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Graduate Research Assistant</div>
-        <div class="exp-date">Jan 2020 — Sep 2021</div>
-      </div>
-      <div class="exp-company">University of Guelph · Guelph, ON, CA</div>
-      <ul class="exp-bullets">
-        <li>Developed ML models forecasting construction costs with 90%+ accuracy using advanced linear regression.</li>
-        <li>Built a COVID-19 X-ray classification CNN model with 92% accuracy.</li>
-        <li>Researched Kalman Filter, Extended Kalman Filter, and deep learning estimation theory.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">CNN</span><span class="tech-pill">Linear Regression</span><span class="tech-pill">Kalman Filter</span><span class="tech-pill">Python</span>
-      </div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-role">Data Scientist</div>
-        <div class="exp-date">Aug 2016 — Dec 2017</div>
-      </div>
-      <div class="exp-company">Aeen Naghsh Group · Shiraz, Iran</div>
-      <ul class="exp-bullets">
-        <li>Applied deep learning models to predict renovation time and cost for construction projects.</li>
-        <li>Cleaned and prepared large renovation datasets for ML model training.</li>
-      </ul>
-      <div class="exp-tech">
-        <span class="tech-pill">Deep Learning</span><span class="tech-pill">Python</span><span class="tech-pill">Data Cleaning</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-label">04. Projects</div>
-  <h2 class="section-title">Selected Work</h2>
-  <div class="projects-grid">
-    <div class="project-card" data-num="01">
-      <div class="project-name">PySpark Cloud Generic ETL Framework</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">PySpark</span><span class="project-tech-tag">Docker</span><span class="project-tech-tag">Kubernetes</span><span class="project-tech-tag">S3</span><span class="project-tech-tag">Kafka</span><span class="project-tech-tag">Snowflake</span>
-      </div>
-      <p class="project-desc">Reads Avro/CSV/Parquet from S3, on-prem, and local storage. Applies filters and transformations, publishes to Confluent Kafka, and stores in Snowflake with S3 redundancy.</p>
-    </div>
-    <div class="project-card" data-num="02">
-      <div class="project-name">COVID-19 X-Ray Classification Serverless API</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">TensorFlow</span><span class="project-tech-tag">Flask</span><span class="project-tech-tag">AWS Lambda</span><span class="project-tech-tag">API Gateway</span><span class="project-tech-tag">Cognito</span>
-      </div>
-      <p class="project-desc">CNN model achieving 92% classification accuracy on chest X-rays. Deployed as a serverless API via Flask + Zappa on AWS Lambda, with Amazon Cognito authentication.</p>
-    </div>
-    <div class="project-card" data-num="03">
-      <div class="project-name">Canada Renovation Cost Predictor</div>
-      <div class="project-tech">
-        <span class="project-tech-tag">XGBoost</span><span class="project-tech-tag">Deep Learning</span><span class="project-tech-tag">Linear Regression</span><span class="project-tech-tag">Python</span>
-      </div>
-      <p class="project-desc">Scraped and engineered renovation cost data, trained Linear Regression, Deep Learning, and XGBoost models with L2 regularization, deployed for real-world prediction.</p>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="section-label">05. Education</div>
-  <h2 class="section-title">Academic Background</h2>
-  <div class="edu-list">
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">M.Sc. Information and Data Science</div>
-        <div class="edu-school">University of California, Berkeley</div>
-        <div class="edu-note">In progress — Berkeley, California, US</div>
-      </div>
-      <div class="edu-year">2026 – 2028</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">M.Sc. Computer Engineering</div>
-        <div class="edu-school">University of Guelph</div>
-        <div class="edu-note">Thesis: "Automated Curbside Waste Collection using Advanced Computer Vision Strategies"</div>
-      </div>
-      <div class="edu-year">2018 – 2020</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">B.Sc. Electrical and Communication Engineering</div>
-        <div class="edu-school">Fars Science and Research University</div>
-        <div class="edu-note">Final Project: "A Review on Space-Time Coding Techniques"</div>
-      </div>
-      <div class="edu-year">2010 – 2014</div>
-    </div>
-  </div>
-  <h3 style="font-size:1.1rem;font-weight:600;margin:3rem 0 1.5rem;color:var(--text)">Certifications</h3>
-  <div class="certs-grid">
-    <div class="cert-card"><div class="cert-name">AWS Certified Cloud Practitioner</div><div class="cert-issuer">Amazon Web Services · 2021</div></div>
-    <div class="cert-card"><div class="cert-name">AWS Certified Data Analytics Specialty</div><div class="cert-issuer">Amazon Web Services · 2022</div></div>
-    <div class="cert-card"><div class="cert-name">AWS Certified Machine Learning Specialty</div><div class="cert-issuer">Amazon Web Services · 2022</div></div>
-    <div class="cert-card"><div class="cert-name">TensorFlow Deep Learning with Python</div><div class="cert-issuer">Udemy Bootcamp</div></div>
-    <div class="cert-card"><div class="cert-name">Deep Learning &amp; Neural Networks</div><div class="cert-issuer">Coursera</div></div>
-    <div class="cert-card"><div class="cert-name">Complete Python Data Science Bootcamp</div><div class="cert-issuer">Udemy</div></div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="section-label">06. Contact</div>
-  <h2 class="section-title">Get In Touch</h2>
-  <div class="contact-inner">
     <div>
-      <p class="contact-text">Interested in collaborating on a data engineering challenge, ML project, or just want to connect? My inbox is open.</p>
-      <div class="contact-links">
-        <a href="mailto:Ali.lordifar@gmail.com" class="contact-link">
-          <div class="contact-link-icon">✉</div>
-          <div class="contact-link-info"><div class="contact-link-label">Email</div><div class="contact-link-val">Ali.lordifar@gmail.com</div></div>
-        </a>
-        <a href="https://linkedin.com/in/ali-lordifar" class="contact-link">
-          <div class="contact-link-icon">in</div>
-          <div class="contact-link-info"><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">linkedin.com/in/ali-lordifar</div></div>
-        </a>
-        <a href="https://github.com/alilordifar" class="contact-link">
-          <div class="contact-link-icon">⌥</div>
-          <div class="contact-link-info"><div class="contact-link-label">GitHub</div><div class="contact-link-val">github.com/alilordifar</div></div>
-        </a>
-        <a href="https://www.ischool.berkeley.edu/people/mohammad-ali-lordifar" class="contact-link" target="_blank">
-          <div class="contact-link-icon" style="font-size:10px;font-weight:700;color:#fbbf24;background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.25)">UC</div>
-          <div class="contact-link-info"><div class="contact-link-label">UC Berkeley</div><div class="contact-link-val">ischool.berkeley.edu/people/mohammad-ali-lordifar</div></div>
-        </a>
+      <p class="about-p">Senior Data Engineer with <strong>8+ years</strong> building enterprise-scale distributed systems across financial services, media, and research. Specialise in PySpark, real-time Kafka streaming, cloud-native AWS architectures, and metadata-driven ETL frameworks.</p>
+      <p class="about-p">At <strong>Citibank</strong> I architect batch and real-time streaming platforms that power enterprise analytics — from Kafka ingestion through Spark transformation to Snowflake delivery. I hold a parallel background in ML, computer vision, and signal processing from research at EagleVision and University of Guelph.</p>
+      <p class="about-p">Currently pursuing a Master's at <strong>UC Berkeley</strong> with focus on Machine Learning, Distributed Systems, and Scientific AI — applying gravitational-wave DSP techniques to real-time anomaly detection in high-frequency telemetry.</p>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-n">8+</div><div class="astat-l">Years Experience</div></div>
+        <div class="astat"><div class="astat-n">3</div><div class="astat-l">AWS Certifications</div></div>
+        <div class="astat"><div class="astat-n">2</div><div class="astat-l">Master's Degrees</div></div>
+        <div class="astat"><div class="astat-n">AVP</div><div class="astat-l">@ Citibank</div></div>
       </div>
     </div>
-    <div class="contact-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Name</label>
-          <input class="form-input" type="text" placeholder="Jane Smith">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="jane@company.com">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <input class="form-input" type="text" placeholder="Data engineering opportunity">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
-      </div>
-      <button class="btn btn-primary" style="align-self:flex-start">Send Message</button>
+    <div>
+      <p style="font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.9rem">Core Focus Areas</p>
+      <ul style="list-style:none">
+        <li style="padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">01</span>Distributed Data Engineering & ETL</li>
+        <li style="padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">02</span>Real-Time Kafka Streaming Architectures</li>
+        <li style="padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">03</span>Cloud-Native AWS Data Platforms</li>
+        <li style="padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">04</span>Machine Learning & Computer Vision</li>
+        <li style="padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">05</span>Signal Processing & Scientific AI</li>
+        <li style="padding:.6rem 0;font-size:.88rem;color:var(--ink2);display:flex;align-items:center;gap:.6rem"><span style="color:var(--accent);font-family:var(--mono);font-size:.7rem">06</span>Spark Performance Optimisation</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-copy">© 2026 Ali Lordifar. All rights reserved.</div>
-  <div class="footer-made">Built with <span>♥</span> in Toronto, ON</div>
-</footer>
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="s-label">02 — Stack</div>
+  <h2 class="s-h">Technical Skills</h2>
+  <div class="sg-grid">
+    <div class="sg">
+      <div class="sg-title">Languages</div>
+      <div class="tags"><span class="tag ta">Python</span><span class="tag ta">SQL</span><span class="tag ta">Bash</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-title">Data Engineering</div>
+      <div class="tags"><span class="tag tb">PySpark</span><span class="tag tb">Apache Spark</span><span class="tag tb">Kafka</span><span class="tag tb">Spark Streaming</span><span class="tag tb">Snowflake</span><span class="tag tb">Hadoop</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-title">Cloud & Infrastructure</div>
+      <div class="tags"><span class="tag tg">EKS</span><span class="tag tg">S3</span><span class="tag tg">Lambda</span><span class="tag tg">Glue</span><span class="tag tg">MWAA</span><span class="tag tg">SageMaker</span><span class="tag tg">EC2</span><span class="tag td">Kubernetes</span><span class="tag td">Docker</span><span class="tag td">OpenShift</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-title">ML & AI</div>
+      <div class="tags"><span class="tag ty">TensorFlow</span><span class="tag ty">Scikit-learn</span><span class="tag ty">Deep Learning</span><span class="tag ty">Computer Vision</span><span class="tag ty">Transfer Learning</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-title">Signal Processing</div>
+      <div class="tags"><span class="tag tr">DSP</span><span class="tag tr">FFT</span><span class="tag tr">PSD Estimation</span><span class="tag tr">Kalman Filters</span><span class="tag tr">Time-Series</span><span class="tag tr">Statistical Analysis</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-title">Databases & Tools</div>
+      <div class="tags"><span class="tag td">PostgreSQL</span><span class="tag td">Git</span><span class="tag td">Jenkins</span><span class="tag td">Linux</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="s-label">03 — Career</div>
+  <h2 class="s-h">Experience</h2>
+  <div class="tl">
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-role">Senior Data Engineer — Assistant Vice President</div>
+        <div class="exp-date">Nov 2022 – Present</div>
+      </div>
+      <div class="exp-co">Citibank · Toronto, ON</div>
+      <ul>
+        <li>Architected scalable AWS batch and real-time data platforms using PySpark, Kafka, EKS, MWAA, and Snowflake for enterprise-scale analytics workloads.</li>
+        <li>Designed distributed streaming frameworks enabling near real-time ingestion, transformation, and orchestration of high-volume datasets across cloud-native data lake systems.</li>
+        <li>Built reusable metadata-driven ETL frameworks reducing onboarding time and minimising manual configuration across enterprise data sources.</li>
+        <li>Developed internal APIs and automation services to streamline cloud data onboarding, deployment, and orchestration workflows.</li>
+        <li>Optimised Spark workloads for performance and cost efficiency within Kubernetes/OpenShift environments.</li>
+        <li>Collaborated with platform engineering and DevOps to improve observability, CI/CD automation, and deployment standardisation.</li>
+      </ul>
+    </div>
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-role">Data Scientist</div>
+        <div class="exp-date">Jun 2022 – Oct 2022</div>
+      </div>
+      <div class="exp-co">Eon Media · Toronto, ON</div>
+      <ul>
+        <li>Developed and deployed deep learning and ML models on AWS using SageMaker, Lambda, and EC2.</li>
+        <li>Built scalable serverless inference APIs with Flask and AWS services enabling low-latency real-time predictions.</li>
+        <li>Automated model training and deployment pipelines, accelerating production release cycles.</li>
+      </ul>
+    </div>
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-role">Machine Learning Researcher</div>
+        <div class="exp-date">May 2020 – Sep 2021</div>
+      </div>
+      <div class="exp-co">EagleVision Systems · Kitchener, ON</div>
+      <ul>
+        <li>Developed computer vision and deep learning systems for intelligent curbside waste collection and autonomous perception.</li>
+        <li>Built CNN, YOLO, and SSD-based object detection pipelines achieving high-accuracy image classification.</li>
+        <li>Integrated vision models with Azure Kinect DK and NVIDIA Jetson TX2 embedded platforms.</li>
+        <li>Owned full ML lifecycle — data annotation, preprocessing, training, optimisation, and edge deployment.</li>
+      </ul>
+    </div>
+    <div class="exp">
+      <div class="exp-head">
+        <div class="exp-role">Graduate Research Assistant</div>
+        <div class="exp-date">Jan 2020 – Sep 2021</div>
+      </div>
+      <div class="exp-co">University of Guelph · Guelph, ON</div>
+      <ul>
+        <li>Researched machine learning, estimation theory, and statistical signal analysis.</li>
+        <li>Developed predictive ML models for construction cost forecasting and project time estimation.</li>
+        <li>Built CNN-based medical imaging pipelines for COVID-19 classification using transfer learning.</li>
+        <li>Researched Kalman Filters and Extended Kalman Filters for dynamic system estimation and tracking.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="s-label">04 — Work</div>
+  <h2 class="s-h">Selected Projects</h2>
+  <div class="proj-grid">
+    <div class="proj">
+      <div class="proj-ico">🌊</div>
+      <div class="proj-name">Gravitational-Wave Anomaly Detection</div>
+      <p class="proj-desc">Real-time signal processing pipelines inspired by LIGO data. Applies FFT, PSD estimation, whitening, and time-frequency analysis on noisy scientific telemetry for low-latency event detection.</p>
+      <div class="ptags"><span class="pt">Python</span><span class="pt">DSP</span><span class="pt">FFT</span><span class="pt">ML</span><span class="pt">Scientific AI</span></div>
+    </div>
+    <div class="proj">
+      <div class="proj-ico">⚡</div>
+      <div class="proj-name">Distributed PySpark Streaming Framework</div>
+      <p class="proj-desc">Metadata-driven ETL and streaming architecture using PySpark, Kafka, Snowflake, and AWS. Reusable ingestion framework supporting structured and semi-structured enterprise data pipelines at scale.</p>
+      <div class="ptags"><span class="pt">PySpark</span><span class="pt">Kafka</span><span class="pt">Snowflake</span><span class="pt">Kubernetes</span><span class="pt">AWS</span></div>
+    </div>
+    <div class="proj">
+      <div class="proj-ico">👁️</div>
+      <div class="proj-name">Computer Vision & Embedded AI</div>
+      <p class="proj-desc">Real-time object detection and depth estimation using TensorFlow, YOLO, SSD, and OpenCV. Deployed optimised inference pipelines on NVIDIA Jetson TX2 with sensor fusion for autonomous perception.</p>
+      <div class="ptags"><span class="pt">YOLO</span><span class="pt">TensorFlow</span><span class="pt">OpenCV</span><span class="pt">Jetson TX2</span><span class="pt">Edge AI</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="s-label">05 — Academic</div>
+  <h2 class="s-h">Education</h2>
+  <div class="edu-grid">
+    <div class="edu">
+      <div class="edu-deg">Master of Information and Data Science</div>
+      <div class="edu-school">University of California, Berkeley</div>
+      <div class="edu-yr">2026 – 2028 · In Progress</div>
+      <div class="edu-note">Machine Learning · Distributed Systems · Scientific AI · Signal Processing · Real-Time Analytics</div>
+    </div>
+    <div class="edu">
+      <div class="edu-deg">MSc Computer Engineering</div>
+      <div class="edu-school">University of Guelph</div>
+      <div class="edu-yr">2018 – 2020</div>
+      <div class="edu-note">Thesis: Automated Curbside Waste Collection using Advanced Computer Vision Strategies</div>
+    </div>
+    <div class="edu">
+      <div class="edu-deg">BSc Electrical & Communication Engineering</div>
+      <div class="edu-school">Fars Science and Research University</div>
+      <div class="edu-yr">2010 – 2014</div>
+      <div class="edu-note">Final Project: Review of Space-Time Coding Techniques</div>
+    </div>
+  </div>
+  <div class="certs">
+    <div class="cert"><div class="cert-ico">☁️</div><div><div class="cert-name">AWS Certified ML – Specialty</div><div class="cert-by">Amazon Web Services</div></div></div>
+    <div class="cert"><div class="cert-ico">📊</div><div><div class="cert-name">AWS Certified Data Analytics – Specialty</div><div class="cert-by">Amazon Web Services</div></div></div>
+    <div class="cert"><div class="cert-ico">🏅</div><div><div class="cert-name">AWS Certified Cloud Practitioner</div><div class="cert-by">Amazon Web Services</div></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="s-label">06 — Connect</div>
+  <h2 class="s-h">Get in Touch</h2>
+  <p style="color:var(--ink2);max-width:460px;margin-bottom:2rem;font-size:.94rem;line-height:1.85">Open to senior and staff-level data engineering roles, consulting, and research collaborations.</p>
+  <div class="contact-grid">
+    <a class="chip" href="mailto:ali.lordifar@gmail.com">
+      <span class="chip-lbl">Email</span><span class="chip-val">ali.lordifar@gmail.com</span>
+    </a>
+    <a class="chip" href="https://linkedin.com/in/ali-lordifar" target="_blank">
+      <span class="chip-lbl">LinkedIn</span><span class="chip-val">ali-lordifar</span>
+    </a>
+    <a class="chip" href="https://github.com/alilordifar" target="_blank">
+      <span class="chip-lbl">GitHub</span><span class="chip-val">alilordifar</span>
+    </a>
+    <a class="chip" href="https://www.ischool.berkeley.edu/people/mohammad-ali-lordifar" target="_blank">
+      <span class="chip-lbl">UC Berkeley</span><span class="chip-val">View Profile →</span>
+    </a>
+  </div>
+</section>
+
+<footer>Built by <em>Ali Lordifar</em> · Toronto, ON · 2025</footer>
 
 </body>
 </html>
